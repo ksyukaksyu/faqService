@@ -1,0 +1,62 @@
+{{ register_asset_bundle('frontend/assets/AppAsset') }}  {# asset root for yii advanced template #}
+{{   void(this.beginPage()) }}
+<!DOCTYPE html>
+<html lang="{{ app.language }}">
+    <head>
+        <meta charset="{{ app.charset }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ html.encode(this.title) }}</title>
+        {{ html.csrfMetaTags | raw }}
+        {{   void(this.head) }}
+    </head>
+    <body>
+        {{   void(this.beginBody()) }}
+        <section id="header">
+        {{ nav_bar_begin({
+            'brandLabel': '<div class="logo"><img src="http://design.ubuntu.com/wp-content/uploads/ubuntu-logo32.png" height="32px" alt="logo"/></div>',
+            'brandUrl' : app.homeUrl,
+            'options' : {
+                'class' : 'header navbar navbar-fixed-top',
+            }
+        }) }}
+        {% set menuItems = [] %}
+        {% if app.user.isGuest == false %}
+            {% set menuItems = menuItems|merge([
+                {'label' : 'Main', 'url' : ['/']},
+                {'label' : 'Categories', 'url' : ['/categories']},
+                {'label' : 'Questions', 'url' : ['/questions']},
+                {'label' : 'Stop Words', 'url' : ['/stopwords']},
+                {'label' : 'Users', 'url' : ['/users']},
+
+                {
+                    'label' : 'Logout (' ~ app.user.identity.username ~ ')',
+                    'url' : ['/site/logout'],
+                    'linkOptions' : {'data-method' : 'post'}
+                }
+            ])
+        %}
+        {% else %}
+            {% set menuItems = menuItems|merge([
+                {'label' : 'Sign In', 'url' : ['/site/login']}
+            ])
+        %}
+        {% endif %}
+        {{ nav_widget({
+            'options': {
+                'class': 'navbar-nav navbar-right',
+            },
+            'items': menuItems
+        }) }}
+        {{ nav_bar_end() }}
+        </section>
+        {{ content | raw}}
+        <footer class="footer">
+            <div class="container">
+                <p class="pull-left">&copy; My Company {{ 'now'|date('Y') }}</p>
+                <p class="pull-right">{{ Yii.powered() | raw }}</p>
+            </div>
+        </footer>
+        {{   void(this.endBody()) }}
+    </body>
+</html>
+{{   void(this.endPage()) }}

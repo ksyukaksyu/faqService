@@ -1,0 +1,39 @@
+{{ use('/yii/grid/GridView') }}
+{% set title = 'Questions' %}
+{{ set(this, 'title', title) }}
+{% if not this.params.breadcrumbs %}
+{{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}
+{% endif %}
+{% set breadcrumbs = this.params.breadcrumbs %}
+{% set breadcrumbs = breadcrumbs|merge([title]) %}
+{{ set(this, 'params', this.params|merge({'breadcrumbs': breadcrumbs})) }}
+<div class="question-index">
+    <h1>{{ html.encode(this.title) }}</h1>
+    {# include('_search.twig', {'model': searchModel}) #}
+    <p>
+        <a href="{{ path(['create']) }}" class="btn btn-success">{{ 'Create Question' }}</a>
+    </p>
+    {{ grid_view_widget({
+            'dataProvider': dataProvider,
+            'filterModel': searchModel,
+                'columns': [
+                {'class': '\\yii\\grid\\SerialColumn'},
+
+                'id',
+                'id_category',
+                'datetime_added',
+                'state',
+                'is_blocked',
+
+                {'class': '\\yii\\grid\\ActionColumn'},
+            ],
+        })
+    }}
+{#
+'is_telegram',
+'author_name',
+'author_mail',
+'question:ntext',
+'answer:ntext'
+#}
+</div>

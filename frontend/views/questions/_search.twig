@@ -1,0 +1,34 @@
+{{ use('/yii/widgets/ActiveForm') }}
+<div class="question-search">
+    {% set form = active_form_begin({
+            'action': ['index'],
+            'method': 'get',
+        })
+    %}
+
+    {{ form.field(model, 'id')|raw }}
+
+    {{ form.field(model, 'id_category')|raw }}
+
+    {{ form.field(model, 'datetime_added')|raw }}
+
+    {{ form.field(model, 'state')|raw }}
+
+    {{ form.field(model, 'is_blocked')|raw }}
+
+    {# form.field(model, 'is_telegram')|raw #}
+
+    {# form.field(model, 'author_name')|raw #}
+
+    {# form.field(model, 'author_mail')|raw #}
+
+    {# form.field(model, 'question')|raw #}
+
+    {# form.field(model, 'answer')|raw #}
+
+    <div class="form-group">
+        <input type="submit" value="{{ 'Search' }}" class="btn btn-primary">
+        <input type="reset" value="{{ 'Reset' }}" class="btn btn-default">
+    </div>
+    {{ active_form_end() }}
+</div>

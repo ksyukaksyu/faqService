@@ -1,0 +1,1 @@
+<a href="{{ path('view', {urlParams})}}" >{{ html.encode(model.nameAttribute) }}</a>

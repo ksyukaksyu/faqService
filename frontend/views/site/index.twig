@@ -1,0 +1,31 @@
+{{ set(this,'title','FAQ') }}
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col m3 l2">
+        <ul class="section table-of-contents">
+            {% for category in categories.query %}
+                <li><a href="#category-{{ category.id }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col m9 l10">
+        {% for category in categories.query %}
+            {% set questions =  category.getQuestions().where("state='published' AND is_blocked=0").all() %}
+                <div id="#category-{{ category.id }}" class="scrollspy">
+                    <h5>{{ category.name }}</h5>
+                    <ul class="collapsible" data-collapsible="accordion">
+                    {% for question in questions %}
+                        <li>
+                            <div class="collapsible-header"><i
+                                        class="material-icons">filter_drama</i>{{ question.question }}</div>
+                            <div class="collapsible-body"><p>{{ question.answer }}</p></div>
+                        </li>
+                     {% endfor %}
+                    </ul>
+                </div>
+        {% endfor %}
+    </div>
+</div>

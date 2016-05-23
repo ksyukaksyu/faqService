@@ -1,0 +1,18 @@
+{{ use('/yii/widgets/ActiveForm') }}
+<div class="stopword-search">
+    {% set form = active_form_begin({
+            'action': ['index'],
+            'method': 'get',
+        })
+    %}
+
+    {{ form.field(model, 'id')|raw }}
+
+    {{ form.field(model, 'word')|raw }}
+
+    <div class="form-group">
+        <input type="submit" value="{{ 'Search' }}" class="btn btn-primary">
+        <input type="reset" value="{{ 'Reset' }}" class="btn btn-default">
+    </div>
+    {{ active_form_end() }}
+</div>
