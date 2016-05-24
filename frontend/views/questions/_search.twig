@@ -6,15 +6,15 @@
         })
     %}
 
-    {{ form.field(model, 'id')|raw }}
+    {#{{ form.field(model, 'id')|raw }}#}
 
-    {{ form.field(model, 'id_category')|raw }}
+    {#{{ form.field(model, 'id_category')|raw }}#}
 
-    {{ form.field(model, 'datetime_added')|raw }}
+    {#{{ form.field(model, 'datetime_added')|raw }}#}
 
-    {{ form.field(model, 'state')|raw }}
+    {#{{ form.field(model, 'state')|raw }}#}
 
-    {{ form.field(model, 'is_blocked')|raw }}
+    {#{{ form.field(model, 'is_blocked')|raw }}#}
 
     {# form.field(model, 'is_telegram')|raw #}
 
@@ -22,7 +22,7 @@
 
     {# form.field(model, 'author_mail')|raw #}
 
-    {# form.field(model, 'question')|raw #}
+    {{ form.field(model, 'question')|raw }}
 
     {# form.field(model, 'answer')|raw #}
 

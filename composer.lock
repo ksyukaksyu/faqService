@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a56b1dc2146cb717512a16a5422bec7",
-    "content-hash": "284a79e0572e6db5dc0efd4994b75b3c",
+    "hash": "409610063545c0ec61ce09890d59f5be",
+    "content-hash": "f9e72b7cbc5c90589ce2302f8b5df861",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -131,80 +131,6 @@
                 "jquery",
                 "mask",
                 "plugins"
-            ]
-        },
-        {
-            "name": "bower-asset/materialize",
-            "version": "v0.97.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Dogfalo/materialize.git",
-                "reference": "793e5716040cb133041b55be75b1fae51debb9f3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Dogfalo/materialize/zipball/793e5716040cb133041b55be75b1fae51debb9f3",
-                "reference": "793e5716040cb133041b55be75b1fae51debb9f3",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery": ">=2.1.1"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "bin/materialize.css",
-                    "bin/materialize.js",
-                    "fonts/roboto/Roboto-Bold.ttf",
-                    "fonts/roboto/Roboto-Bold.woff",
-                    "fonts/roboto/Roboto-Bold.woff2",
-                    "fonts/roboto/Roboto-Light.ttf",
-                    "fonts/roboto/Roboto-Light.woff",
-                    "fonts/roboto/Roboto-Light.woff2",
-                    "fonts/roboto/Roboto-Medium.ttf",
-                    "fonts/roboto/Roboto-Medium.woff",
-                    "fonts/roboto/Roboto-Medium.woff2",
-                    "fonts/roboto/Roboto-Regular.ttf",
-                    "fonts/roboto/Roboto-Regular.woff",
-                    "fonts/roboto/Roboto-Regular.woff2",
-                    "fonts/roboto/Roboto-Thin.ttf",
-                    "fonts/roboto/Roboto-Thin.woff",
-                    "fonts/roboto/Roboto-Thin.woff2"
-                ],
-                "bower-asset-ignore": [
-                    "jade/",
-                    ".gitignore",
-                    "CNAME",
-                    "css/",
-                    "bower.json",
-                    "README.md",
-                    "images/",
-                    "js/jquery.timeago.js",
-                    "js/init.js",
-                    "js/prism.js",
-                    "res/",
-                    "sass/style.scss",
-                    "sass/ghpages-materialize.scss",
-                    "**/*.html",
-                    "**/*.zip",
-                    "**/*.txt",
-                    "sitemap.xml",
-                    "package.json",
-                    "Gruntfile.js"
-                ]
-            },
-            "description": "A modern responsive front-end framework based on Material Design",
-            "keywords": [
-                "css",
-                "design",
-                "framework",
-                "front-end",
-                "js",
-                "material",
-                "mobile-first",
-                "responsive",
-                "sass",
-                "ux"
             ]
         },
         {
@@ -372,51 +298,6 @@
                 "html"
             ],
             "time": "2015-08-05 01:03:42"
-        },
-        {
-            "name": "macgyer/yii2-materializecss",
-            "version": "1.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MacGyer/yii2-materializecss.git",
-                "reference": "793fc726a02878a58c958bd110626de31c16b42d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MacGyer/yii2-materializecss/zipball/793fc726a02878a58c958bd110626de31c16b42d",
-                "reference": "793fc726a02878a58c958bd110626de31c16b42d",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/materialize": "0.97.*",
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "~2.0"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "macgyer\\yii2materializecss\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Christoph Erdmann",
-                    "homepage": "http://www.medienpol.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Materialize CSS implementation for Yii2",
-            "keywords": [
-                "material design",
-                "materialize",
-                "widgets",
-                "yii2"
-            ],
-            "time": "2016-05-16 12:23:28"
         },
         {
             "name": "swiftmailer/swiftmailer",

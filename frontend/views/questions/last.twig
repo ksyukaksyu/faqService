@@ -9,11 +9,9 @@
 {{ set(this, 'params', this.params|merge({'breadcrumbs': breadcrumbs})) }}
 <div class="question-index">
     <h1>{{ html.encode(this.title) }}</h1>
-    {{ include('_search.twig', {'model': searchModel}) }}
     {{ grid_view_widget({
             'dataProvider': dataProvider,
-            'filterModel': searchModel,
-                'columns': [
+            'columns': [
                 {'class': '\\yii\\grid\\SerialColumn'},
 
                 'id',
@@ -26,11 +24,4 @@
             ],
         })
     }}
-{#
-'is_telegram',
-'author_name',
-'author_mail',
-'question:ntext',
-'answer:ntext'
-#}
 </div>

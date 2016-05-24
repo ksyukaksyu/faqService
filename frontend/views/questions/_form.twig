@@ -1,27 +1,33 @@
-{{ use('/yii/widgets/ActiveForm') }}
+{{ use('yii/widgets/ActiveForm') }}
 <div class="question-form">
     {% set form = active_form_begin() %}
 
-        {{ form.field(model, 'id_category').textInput()|raw }}
+    {{ form
+        .field(model, 'author_name')
+        .label("Your Name")
+        .textInput({'maxlength':true})|raw
+    }}
 
-        {{ form.field(model, 'datetime_added').textInput()|raw }}
+    {{ form
+        .field(model, 'author_mail')
+        .label("Your E-Mail")
+        .textInput({'maxlength':true})|raw
+    }}
 
-        {{ form.field(model, 'state').dropDownList({'draft':'Draft','published':'Published','hidden':'Hidden','':''}, {'prompt':''})|raw }}
+    {{ form
+        .field(model, 'id_category')
+        .label("Category")
+        .dropDownList(
+        categories,
+            {'prompt':'Select Category'}
+        )|raw
+    }}
 
-        {{ form.field(model, 'is_blocked').textInput()|raw }}
 
-        {{ form.field(model, 'is_telegram').textInput()|raw }}
-
-        {{ form.field(model, 'author_name').textInput({'maxlength':true})|raw }}
-
-        {{ form.field(model, 'author_mail').textInput({'maxlength':true})|raw }}
-
-        {{ form.field(model, 'question').textarea({'rows':6})|raw }}
-
-        {{ form.field(model, 'answer').textarea({'rows':6})|raw }}
+    {{ form.field(model, 'question').label("Your Question").textarea({'rows':6})|raw }}
 
     <div class="form-group">
-        <input type="submit" value="{{ model.isNewRecord ? 'Create' : 'Update' }}" class="{{ model.isNewRecord ? "btn btn-success" : "btn btn-primary" }}">
+        <input type="submit" value="Add my question" class="btn btn-success" />
     </div>
     {{ active_form_end() }}
 </div>

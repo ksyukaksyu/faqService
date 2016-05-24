@@ -2,12 +2,16 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Category;
 use Yii;
 use frontend\models\Question;
-use frontend\controllers\QuestionsSearch;
+use frontend\models\QuestionAddForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
+
 
 /**
  * QuestionsController implements the CRUD actions for Question model.
@@ -21,6 +25,22 @@ class QuestionsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                //'only' => ['login', 'logout', 'signup'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        //'actions' => ['logout'],
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -37,6 +57,21 @@ class QuestionsController extends Controller
 
         return $this->render('index.twig', [
             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists new Question models.
+     * @return mixed
+     */
+    public function actionNew()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Question::find()->where('state="draft"')->orderBy(['datetime_added' => SORT_DESC])->select('*'),
+        ]);
+
+        return $this->render('last.twig', [
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -60,13 +95,15 @@ class QuestionsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Question();
+        $model = new QuestionAddForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->addFlash('success', "Your question is very important for us! Please wait for an answer from our team ;)");
+            return $this->goHome();
         } else {
             return $this->render('create.twig', [
                 'model' => $model,
+                'categories' => Category::find()->select(['name', 'id'])->indexBy('id')->column()
             ]);
         }
     }

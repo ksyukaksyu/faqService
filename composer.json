@@ -15,8 +15,7 @@
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "yiisoft/yii2-twig": "~2.0.0",
-        "macgyer/yii2-materializecss": "*"
+        "yiisoft/yii2-twig": "~2.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
