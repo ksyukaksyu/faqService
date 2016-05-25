@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Stopword;
-use frontend\controllers\StopwordSearch;
+use frontend\models\StopwordsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,7 +32,7 @@ class StopwordsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new StopwordSearch();
+        $searchModel = new StopwordsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index.twig', [

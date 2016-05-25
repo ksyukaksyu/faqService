@@ -1,5 +1,5 @@
 {{ use('/yii/widgets/DetailView') }}
-{% set title = model.id %}
+{% set title = model.word %}
 {{ set(this, 'title', title) }}
 {% if not this.params.breadcrumbs %}
 {{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}

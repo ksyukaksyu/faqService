@@ -41,7 +41,10 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
         // line 9
         echo "            </ul>
             <br/>
-            <a href=\"/questions/create\" class=\"btn btn-success\">Still have a question?</a>
+            <a href=\"";
+        // line 11
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["url"]) ? $context["url"] : null), "toRoute", array(0 => array(0 => "questions/create")), "method"), "html", null, true);
+        echo "\" class=\"btn btn-success\">Still have a question?</a>
         </nav>
         <br/>
     </div>
@@ -168,7 +171,7 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
 
     public function getDebugInfo()
     {
-        return array (  153 => 42,  145 => 39,  126 => 34,  121 => 32,  113 => 31,  106 => 27,  102 => 26,  98 => 25,  94 => 24,  89 => 22,  86 => 21,  69 => 20,  62 => 19,  60 => 18,  55 => 17,  51 => 16,  42 => 9,  31 => 7,  27 => 6,  19 => 1,);
+        return array (  156 => 42,  148 => 39,  129 => 34,  124 => 32,  116 => 31,  109 => 27,  105 => 26,  101 => 25,  97 => 24,  92 => 22,  89 => 21,  72 => 20,  65 => 19,  63 => 18,  58 => 17,  54 => 16,  46 => 11,  42 => 9,  31 => 7,  27 => 6,  19 => 1,);
     }
 }
 /* {{ set(this,'title','FAQ') }}*/
@@ -181,7 +184,7 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
 /*                 {% endfor %}*/
 /*             </ul>*/
 /*             <br/>*/
-/*             <a href="/questions/create" class="btn btn-success">Still have a question?</a>*/
+/*             <a href="{{ url.toRoute(['questions/create']) }}" class="btn btn-success">Still have a question?</a>*/
 /*         </nav>*/
 /*         <br/>*/
 /*     </div>*/

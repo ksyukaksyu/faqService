@@ -1,0 +1,32 @@
+{{ use('/yii/widgets/ActiveForm') }}
+<div class="user-search">
+    {% set form = active_form_begin({
+            'action': ['index'],
+            'method': 'get',
+        })
+    %}
+
+    {{ form.field(model, 'id')|raw }}
+
+    {{ form.field(model, 'username')|raw }}
+
+    {{ form.field(model, 'auth_key')|raw }}
+
+    {{ form.field(model, 'password_hash')|raw }}
+
+    {{ form.field(model, 'password_reset_token')|raw }}
+
+    {# form.field(model, 'email')|raw #}
+
+    {# form.field(model, 'status')|raw #}
+
+    {# form.field(model, 'created_at')|raw #}
+
+    {# form.field(model, 'updated_at')|raw #}
+
+    <div class="form-group">
+        <input type="submit" value="{{ 'Search' }}" class="btn btn-primary">
+        <input type="reset" value="{{ 'Reset' }}" class="btn btn-default">
+    </div>
+    {{ active_form_end() }}
+</div>

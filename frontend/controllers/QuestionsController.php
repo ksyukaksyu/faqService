@@ -2,10 +2,11 @@
 
 namespace frontend\controllers;
 
-use frontend\models\Category;
 use Yii;
+use frontend\models\Category;
 use frontend\models\Question;
 use frontend\models\QuestionAddForm;
+use frontend\models\QuestionsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

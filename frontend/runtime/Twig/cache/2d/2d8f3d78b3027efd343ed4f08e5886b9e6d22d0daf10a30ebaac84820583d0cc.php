@@ -20,7 +20,7 @@ class __TwigTemplate_a11d8802f64eb1ab03edb12c78042a816a3275317a0fca47578923114ec
         echo "
 ";
         // line 2
-        $context["title"] = $this->getAttribute((isset($context["model"]) ? $context["model"] : null), "id", array());
+        $context["title"] = $this->getAttribute((isset($context["model"]) ? $context["model"] : null), "word", array());
         // line 3
         echo twig_escape_filter($this->env, $this->env->getExtension('yii2-twig')->setProperty((isset($context["this"]) ? $context["this"] : null), "title", (isset($context["title"]) ? $context["title"] : null)), "html", null, true);
         echo "
@@ -87,7 +87,7 @@ class __TwigTemplate_a11d8802f64eb1ab03edb12c78042a816a3275317a0fca47578923114ec
     }
 }
 /* {{ use('/yii/widgets/DetailView') }}*/
-/* {% set title = model.id %}*/
+/* {% set title = model.word %}*/
 /* {{ set(this, 'title', title) }}*/
 /* {% if not this.params.breadcrumbs %}*/
 /* {{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}*/
