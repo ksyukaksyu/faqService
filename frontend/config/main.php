@@ -24,6 +24,13 @@ return [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+                [
+                    'class' => 'common\log\AppTarget',
+                    'levels' => ['info'],
+                    'categories' => ['faq_app'],
+                    'logVars' => [],
+                    'logFile' => '@runtime/logs/actions.log'
+                ],
             ],
         ],
         'errorHandler' => [
@@ -53,7 +60,8 @@ return [
                         'html' => '\yii\helpers\Html',
                         'url' => '\yii\helpers\Url',
                         'Yii' => '\Yii',
-                        'arhelp'=>'\yii\helpers\ArrayHelper'
+                        'arhelp'=>'\yii\helpers\ArrayHelper',
+                        'DatePicker' => 'yii\jui\DatePicker',
                     ],
                     'uses' => ['yii\bootstrap'],
                 ],

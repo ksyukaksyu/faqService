@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "category".
@@ -41,6 +42,9 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'Category ID',
             'name' => 'Category name',
+            'TotalQuestionsNumber' => 'Total',
+            'PublishedQuestionsNumber' => 'Published',
+            'NewQuestionsNumber' => 'New',
         ];
     }
 
@@ -50,5 +54,41 @@ class Category extends \yii\db\ActiveRecord
     public function getQuestions()
     {
         return $this->hasMany(Question::className(), ['id_category' => 'id']);
+    }
+
+    public function getTotalQuestionsNumber() {
+        return Question::find()
+            ->where("id_category={$this->id}")
+            ->count();
+    }
+
+    public function getPublishedQuestionsNumber() {
+        return Question::find()
+            ->where("state='" . Question::STATE_PUBLISHED . "'")
+            ->andWhere("id_category={$this->id}")
+            ->count();
+    }
+
+    public function getNewQuestionsNumber() {
+        return Question::find()
+            ->where("state='" . Question::STATE_DRAFT . "'")
+            ->andWhere("id_category={$this->id}")
+            ->count();
+    }
+
+    public function getRAWData() {
+        return $this->name .
+            Html::tag('span', "new - {$this->NewQuestionsNumber}", [
+                'class' => 'label label-warning right',
+                'title' => 'Total'
+            ]) .
+            Html::tag('span', "published - {$this->PublishedQuestionsNumber}", [
+                'class' => 'label label-success right',
+                'title' => 'Total'
+            ]) .
+            Html::tag('span', "total - {$this->TotalQuestionsNumber}", [
+                'class' => 'label label-primary right',
+                'title' => 'Total'
+            ]);
     }
 }

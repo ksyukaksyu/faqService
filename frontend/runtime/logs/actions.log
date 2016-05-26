@@ -1,0 +1,16 @@
+[2016-05-25 21:16:35] admin New stopword was successfuly updated :)
+[2016-05-25 21:21:12] admin deleted stopword (id) "fuck"
+[2016-05-25 21:21:50] admin added new stopword "fuck"
+[2016-05-25 21:22:59] admin added new stopword "beeee"
+[2016-05-25 21:23:02] admin deleted stopword (6) "beeee"
+[2016-05-25 21:29:26] admin created a new user "Winnie Fu***ing Pooh"
+[2016-05-25 21:29:49] admin updates the stopword (8) "tester4"
+[2016-05-25 21:30:00] admin updates the user (2) "tester"
+[2016-05-25 21:31:48] admin deleted the user (7) "tester2"
+[2016-05-25 22:54:13] admin added a new category "Flood"
+[2016-05-25 22:55:32] admin deleted the category (9) "Flood"
+[2016-05-26 16:10:20] admin deleted the question (21) [no category]
+[2016-05-26 16:13:51] admin deleted the question (17) [no category]
+[2016-05-26 16:14:41] admin deleted the question (20) [no category]
+[2016-05-26 16:14:55] admin deleted the question (32) from category "PHP" (3)
+[2016-05-26 16:19:45] admin added a new stopword "vk.com"

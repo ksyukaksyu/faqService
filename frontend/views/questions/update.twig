@@ -1,4 +1,4 @@
-{% set title = 'Update Question: ' ~ model.id %}
+{% set title = 'Update Question from ' ~ model.author_name %}
 {{ set(this, 'title', title) }}
 {% if not this.params.breadcrumbs %}
 {{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}
@@ -10,7 +10,7 @@
 {{ set(this, 'params', this.params|merge({'breadcrumbs': breadcrumbs})) }}
 <div class="question-update">
     <h1>{{ html.encode(this.title) }}</h1>
-        {{ include('_form.twig', {
+        {{ include('_adminForm.twig', {
                 'model': model,
             })
         }}

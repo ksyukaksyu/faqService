@@ -56,6 +56,27 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Getter for string-like status of user
+     *
+     * @return string
+     */
+    public function getStatus() {
+        return self::getStatusesList()[$this->status];
+    }
+
+    /**
+     * Statuses list
+     *
+     * @return array
+     */
+    public static function getStatusesList() {
+        return [
+            self::STATUS_DELETED => 'Deleted',
+            self::STATUS_ACTIVE => 'Active',
+        ];
+    }
+
+    /**
      * @inheritdoc
      */
     public static function findIdentity($id)
@@ -186,8 +207,8 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public function getUFStatus() {
-        die;
-        return '2323232';
+    public function delete() {
+        $this->status = self::STATUS_DELETED;
+        return $this->save();
     }
 }

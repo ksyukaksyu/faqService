@@ -20,7 +20,7 @@ class __TwigTemplate_3c8b74c9575b4920524e45b2a26c892da648c4e841bee95521abd3b754e
         echo "
 ";
         // line 2
-        $context["title"] = "Questions";
+        $context["title"] = "New Questions";
         // line 3
         echo twig_escape_filter($this->env, $this->env->getExtension('yii2-twig')->setProperty((isset($context["this"]) ? $context["this"] : null), "title", (isset($context["title"]) ? $context["title"] : null)), "html", null, true);
         echo "
@@ -28,6 +28,7 @@ class __TwigTemplate_3c8b74c9575b4920524e45b2a26c892da648c4e841bee95521abd3b754e
         // line 4
         if ( !$this->getAttribute($this->getAttribute((isset($context["this"]) ? $context["this"] : null), "params", array()), "breadcrumbs", array())) {
             // line 5
+            echo "    ";
             echo twig_escape_filter($this->env, $this->env->getExtension('yii2-twig')->setProperty((isset($context["this"]) ? $context["this"] : null), "params", twig_array_merge($this->getAttribute((isset($context["this"]) ? $context["this"] : null), "params", array()), array("breadcrumbs" => array()))), "html", null, true);
             echo "
 ";
@@ -40,17 +41,39 @@ class __TwigTemplate_3c8b74c9575b4920524e45b2a26c892da648c4e841bee95521abd3b754e
         echo twig_escape_filter($this->env, $this->env->getExtension('yii2-twig')->setProperty((isset($context["this"]) ? $context["this"] : null), "params", twig_array_merge($this->getAttribute((isset($context["this"]) ? $context["this"] : null), "params", array()), array("breadcrumbs" => (isset($context["breadcrumbs"]) ? $context["breadcrumbs"] : null)))), "html", null, true);
         echo "
 <div class=\"question-index\">
-    <h1>";
-        // line 11
+    <div class=\"row\">
+        <div class=\"col-xs-6 col-md-2\">
+            ";
+        // line 13
+        echo twig_include($this->env, $context, "_menu.twig");
+        echo "
+        </div>
+        <div class=\"col-xs-6 col-md-10\">
+            <h1>";
+        // line 16
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["html"]) ? $context["html"] : null), "encode", array(0 => $this->getAttribute((isset($context["this"]) ? $context["this"] : null), "title", array())), "method"), "html", null, true);
         echo "</h1>
-    ";
-        // line 12
-        echo $this->env->getExtension('yii2-twig')->widget("grid_view", array("dataProvider" =>         // line 13
-(isset($context["dataProvider"]) ? $context["dataProvider"] : null), "columns" => array(0 => array("class" => "\\yii\\grid\\SerialColumn"), 1 => "id", 2 => "idCategory.name", 3 => "datetime_added:datetime", 4 => "state", 5 => "is_blocked", 6 => array("class" => "\\yii\\grid\\ActionColumn"))));
-        // line 26
+            ";
+        // line 18
+        echo "            ";
+        echo twig_include($this->env, $context, "_categories.twig");
         echo "
-</div>";
+            ";
+        // line 19
+        echo $this->env->getExtension('yii2-twig')->widget("grid_view", array("dataProvider" =>         // line 20
+(isset($context["dataProvider"]) ? $context["dataProvider"] : null), "filterModel" =>         // line 21
+(isset($context["searchModel"]) ? $context["searchModel"] : null), "columns" => array(0 => array("class" => "\\yii\\grid\\SerialColumn"), 1 => "author_name", 2 => "questionShort", 3 => array("attribute" => "id_category", "value" => "category.name", "label" => "Category", "filter" =>         // line 31
+(isset($context["categories"]) ? $context["categories"] : null)), 4 => array("attribute" => "datetime_added", "format" => "datetime", "filter" => $this->getAttribute(        // line 36
+(isset($context["DatePicker"]) ? $context["DatePicker"] : null), "widget", array(0 => array("model" =>         // line 37
+(isset($context["searchModel"]) ? $context["searchModel"] : null), "attribute" => "datetime_added", "dateFormat" => "dd.MM.yyyy", "options" => array("class" => "form-control"))), "method")), 5 => array("attribute" => "telegram", "format" => "raw", "label" => ""), 6 => array("class" => "\\yii\\grid\\ActionColumn"))));
+        // line 54
+        echo "
+        </div>
+    </div>
+
+    ";
+        // line 65
+        echo "</div>";
     }
 
     public function getTemplateName()
@@ -65,33 +88,71 @@ class __TwigTemplate_3c8b74c9575b4920524e45b2a26c892da648c4e841bee95521abd3b754e
 
     public function getDebugInfo()
     {
-        return array (  52 => 26,  50 => 13,  49 => 12,  45 => 11,  40 => 9,  38 => 8,  36 => 7,  31 => 5,  29 => 4,  25 => 3,  23 => 2,  19 => 1,);
+        return array (  76 => 65,  70 => 54,  68 => 37,  67 => 36,  66 => 31,  65 => 21,  64 => 20,  63 => 19,  58 => 18,  54 => 16,  48 => 13,  41 => 9,  39 => 8,  37 => 7,  31 => 5,  29 => 4,  25 => 3,  23 => 2,  19 => 1,);
     }
 }
 /* {{ use('/yii/grid/GridView') }}*/
-/* {% set title = 'Questions' %}*/
+/* {% set title = 'New Questions' %}*/
 /* {{ set(this, 'title', title) }}*/
 /* {% if not this.params.breadcrumbs %}*/
-/* {{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}*/
+/*     {{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}*/
 /* {% endif %}*/
 /* {% set breadcrumbs = this.params.breadcrumbs %}*/
 /* {% set breadcrumbs = breadcrumbs|merge([title]) %}*/
 /* {{ set(this, 'params', this.params|merge({'breadcrumbs': breadcrumbs})) }}*/
 /* <div class="question-index">*/
-/*     <h1>{{ html.encode(this.title) }}</h1>*/
-/*     {{ grid_view_widget({*/
-/*             'dataProvider': dataProvider,*/
-/*             'columns': [*/
-/*                 {'class': '\\yii\\grid\\SerialColumn'},*/
+/*     <div class="row">*/
+/*         <div class="col-xs-6 col-md-2">*/
+/*             {{ include('_menu.twig') }}*/
+/*         </div>*/
+/*         <div class="col-xs-6 col-md-10">*/
+/*             <h1>{{ html.encode(this.title) }}</h1>*/
+/*             {# { include('_search.twig', {'model': searchModel}) } #}*/
+/*             {{ include('_categories.twig') }}*/
+/*             {{ grid_view_widget({*/
+/*                 'dataProvider': dataProvider,*/
+/*                 'filterModel': searchModel,*/
+/*                 'columns': [*/
+/*                     {'class': '\\yii\\grid\\SerialColumn'},*/
 /* */
-/*                 'id',*/
-/*                 'idCategory.name',*/
-/*                 'datetime_added:datetime',*/
-/*                 'state',*/
-/*                 'is_blocked',*/
+/*                     'author_name',*/
+/*                     'questionShort',*/
+/*                     {*/
+/*                         'attribute' : 'id_category',*/
+/*                         'value' : 'category.name',*/
+/*                         'label' : 'Category',*/
+/*                         'filter' : categories*/
+/*                     },*/
+/*                     {*/
+/*                         'attribute': 'datetime_added',*/
+/*                         'format': 'datetime',*/
+/*                         'filter': DatePicker.widget({*/
+/*                             'model' : searchModel,*/
+/*                             'attribute': 'datetime_added',*/
+/*                             'dateFormat' : 'dd.MM.yyyy',*/
+/*                             'options' : {*/
+/*                                 'class' : 'form-control'*/
+/*                             }*/
+/*                         })*/
+/*                     },*/
+/*                     {*/
+/*                         'attribute' : 'telegram',*/
+/*                         'format' : 'raw',*/
+/*                         'label' : ''*/
+/*                     },*/
 /* */
-/*                 {'class': '\\yii\\grid\\ActionColumn'},*/
-/*             ],*/
-/*         })*/
-/*     }}*/
+/*                     {'class': '\\yii\\grid\\ActionColumn'},*/
+/*                 ],*/
+/*             })*/
+/*             }}*/
+/*         </div>*/
+/*     </div>*/
+/* */
+/*     {#*/
+/*     'is_telegram',*/
+/*     'author_name',*/
+/*     'author_mail',*/
+/*     'question:ntext',*/
+/*     'answer:ntext'*/
+/*     #}*/
 /* </div>*/

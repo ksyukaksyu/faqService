@@ -19,8 +19,11 @@
                 'columns': [
                 {'class': '\\yii\\grid\\SerialColumn'},
 
-                'id',
-                'name',
+                {
+                    'attribute': 'name',
+                    'format': 'raw',
+                    'value': 'RAWData'
+                },
 
                 {'class': '\\yii\\grid\\ActionColumn'},
             ],

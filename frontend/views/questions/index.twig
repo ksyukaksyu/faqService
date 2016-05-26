@@ -1,5 +1,5 @@
 {{ use('/yii/grid/GridView') }}
-{% set title = 'Questions' %}
+{% set title = 'Questions by Category' %}
 {{ set(this, 'title', title) }}
 {% if not this.params.breadcrumbs %}
 {{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}
@@ -8,24 +8,55 @@
 {% set breadcrumbs = breadcrumbs|merge([title]) %}
 {{ set(this, 'params', this.params|merge({'breadcrumbs': breadcrumbs})) }}
 <div class="question-index">
-    <h1>{{ html.encode(this.title) }}</h1>
-    {{ include('_search.twig', {'model': searchModel}) }}
-    {{ grid_view_widget({
-            'dataProvider': dataProvider,
-            'filterModel': searchModel,
+    <div class="row">
+        <div class="col-xs-6 col-md-2">
+            {{ include('_menu.twig') }}
+        </div>
+        <div class="col-xs-6 col-md-10">
+            <h1>{{ html.encode(this.title) }}</h1>
+            {{ include('_categories.twig') }}
+            {# { include('_search.twig', {'model': searchModel}) } #}
+            {{ grid_view_widget({
+                'dataProvider': dataProvider,
+                'filterModel': searchModel,
                 'columns': [
                 {'class': '\\yii\\grid\\SerialColumn'},
 
-                'id',
-                'idCategory.name',
-                'datetime_added:datetime',
-                'state',
-                'is_blocked',
-
+                'questionShort',
+                {
+                    'attribute' : 'id_category',
+                    'value' : 'category.name',
+                    'label' : 'Category',
+                    'filter' : categories
+                },
+                {
+                    'attribute': 'datetime_added',
+                    'format': 'datetime',
+                    'filter': DatePicker.widget({
+                        'model' : searchModel,
+                        'attribute': 'datetime_added',
+                        'dateFormat' : 'dd.MM.yyyy',
+                        'options' : {
+                            'class' : 'form-control'
+                        }
+                    })
+                },
+                {
+                    'attribute' : 'state',
+                    'filter' : {'published' : 'Published', 'hidden' : 'Hidden'}
+                },
+                {
+                    'attribute' : 'telegram',
+                    'format' : 'raw',
+                    'label' : ''
+                },
                 {'class': '\\yii\\grid\\ActionColumn'},
-            ],
-        })
-    }}
+                ],
+            })
+            }}
+        </div>
+    </div>
+
 {#
 'is_telegram',
 'author_name',

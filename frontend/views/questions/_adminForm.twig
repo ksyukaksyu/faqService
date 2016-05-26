@@ -1,24 +1,37 @@
 {{ use('/yii/widgets/ActiveForm') }}
+{{ use('/yii/widgets/DetailView') }}
 <div class="question-form">
+    {{ detail_view_widget({
+        'model': model,
+        'attributes': [
+            'author_name',
+            'author_mail',
+            'datetime_added:datetime',
+            'is_telegram:boolean',
+            'stopwordsBubles:raw'
+        ]
+    }) }}
+
     {% set form = active_form_begin() %}
-
-    {{ form.field(model, 'id_category').textInput()|raw }}
-
-    {{ form.field(model, 'datetime_added').textInput()|raw }}
-
-    {{ form.field(model, 'state').dropDownList({'draft':'Draft','published':'Published','hidden':'Hidden','':''}, {'prompt':''})|raw }}
-
-    {{ form.field(model, 'is_blocked').textInput()|raw }}
-
-    {{ form.field(model, 'is_telegram').textInput()|raw }}
 
     {{ form.field(model, 'author_name').textInput({'maxlength':true})|raw }}
 
-    {{ form.field(model, 'author_mail').textInput({'maxlength':true})|raw }}
+    {{ form
+        .field(model, 'id_category')
+        .label("Category")
+        .dropDownList(
+            categories,
+            {'prompt':'Select Category'}
+        )|raw
+    }}
 
     {{ form.field(model, 'question').textarea({'rows':6})|raw }}
 
     {{ form.field(model, 'answer').textarea({'rows':6})|raw }}
+
+    {{ form.field(model, 'state').dropDownList({'draft':'Draft','published':'Published','hidden':'Hidden','':''}, {'prompt':''})|raw }}
+
+    {{ form.field(model, 'is_blocked').checkbox()|raw }}
 
     <div class="form-group">
         <input type="submit" value="{{ model.isNewRecord ? 'Create' : 'Update' }}" class="{{ model.isNewRecord ? "btn btn-success" : "btn btn-primary" }}">

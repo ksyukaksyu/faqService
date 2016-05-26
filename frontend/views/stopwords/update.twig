@@ -1,11 +1,11 @@
-{% set title = 'Update Stopword: ' ~ model.id %}
+{% set title = 'Update Stopword: ' ~ model.word %}
 {{ set(this, 'title', title) }}
 {% if not this.params.breadcrumbs %}
 {{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}
 {% endif %}
 {% set breadcrumbs = this.params.breadcrumbs %}
 {% set breadcrumbs = breadcrumbs|merge([{'label': 'Stopwords', 'url': path(['index'])}]) %}
-{% set breadcrumbs = breadcrumbs|merge([{'label': model.id, 'url': path('view', {'id': model.id})}]) %}
+{% set breadcrumbs = breadcrumbs|merge([{'label': model.word, 'url': path('view', {'id': model.id})}]) %}
 {% set breadcrumbs = breadcrumbs|merge(['Update']) %}
 {{ set(this, 'params', this.params|merge({'breadcrumbs': breadcrumbs})) }}
 <div class="stopword-update">

@@ -1,0 +1,6 @@
+<div class="form-group">
+    {% for key, category in categories %}
+        <button type="button" class="btn btn-{% if key == -1 %}warning{% else %}primary{% endif %}" onclick="questionFilter_setCategory('{{ key }}')">{{ category }}</button>
+    {% endfor %}
+    <button type="button" class="btn btn-success" onclick="questionFilter_setCategory('')">All</button>
+</div>

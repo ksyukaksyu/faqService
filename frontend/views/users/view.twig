@@ -1,5 +1,5 @@
 {{ use('/yii/widgets/DetailView') }}
-{% set title = model.id %}
+{% set title = model.username %}
 {{ set(this, 'title', title) }}
 {% if not this.params.breadcrumbs %}
 {{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}
@@ -11,7 +11,7 @@
 <div class="user-view">
     <h1>{{ html.encode(this.title) }}</h1>
     <p>
-        <a href="{{ path('update', {'id': model.id}) }}" class="btn btn-primary">{{ 'Update' }}</a>
+        <a href="{{ path('update', {'id': model.id}) }}" class="btn btn-primary">{{ 'Edit' }}</a>
         <a href="{{ path('delete', {'id': model.id}) }}" class="btn btn-danger" data-confirm="{{ 'Are you sure you want to delete this item?' }}" data-method="post">{{ 'Delete' }}</a>
     </p>
     {{ detail_view_widget({
@@ -19,13 +19,14 @@
             'attributes': [
                 'id',
                 'username',
-                'auth_key',
-                'password_hash',
-                'password_reset_token',
                 'email:email',
-                'status',
-                'created_at',
-                'updated_at',
+                {
+                    'attribute' : 'status',
+                    'format': 'text',
+                    'value' : model.Status,
+                },
+                'created_at:datetime',
+                'updated_at:datetime',
             ]
         })
     }}

@@ -1,0 +1,7 @@
+<nav class="fixed">
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation"><a href="{{ url.toRoute(['questions/new']) }}">New Questions <span class="label label-pill label-default">{{ statistics.new }}</span></a> </li>
+        <li role="presentation"><a href="{{ url.toRoute(['questions/index']) }}">Published Questions <span class="label label-pill label-default">{{ statistics.published }}</span></a></li>
+        <li role="presentation"><a href="{{ url.toRoute(['questions/blocked']) }}">Blocked Questions <span class="label label-pill label-default">{{ statistics.blocked }}</span></a></li>
+    </ul>
+</nav>

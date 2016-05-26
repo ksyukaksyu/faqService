@@ -71,7 +71,7 @@ class __TwigTemplate_ffd013ffd849eea3b8509743c6dc4eb114362e3ebd7147a0b600c646660
         if (($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "user", array()), "isGuest", array()) == false)) {
             // line 26
             echo "        ";
-            $context["menuItems"] = twig_array_merge((isset($context["menuItems"]) ? $context["menuItems"] : null), array(0 => array("label" => "Main", "url" => array(0 => "/")), 1 => array("label" => "Categories", "url" => array(0 => "/categories")), 2 => array("label" => "Last Questions", "url" => array(0 => "/questions/new")), 3 => array("label" => "Stop Words", "url" => array(0 => "/stopwords")), 4 => array("label" => "Users", "url" => array(0 => "/users")), 5 => array("label" => (("Logout (" . $this->getAttribute($this->getAttribute($this->getAttribute(            // line 32
+            $context["menuItems"] = twig_array_merge((isset($context["menuItems"]) ? $context["menuItems"] : null), array(0 => array("label" => "Main", "url" => array(0 => "/")), 1 => array("label" => "Categories", "url" => array(0 => "/categories")), 2 => array("label" => "Questions", "url" => array(0 => "/questions/new")), 3 => array("label" => "Stop Words", "url" => array(0 => "/stopwords")), 4 => array("label" => "Users", "url" => array(0 => "/users")), 5 => array("label" => (("Logout (" . $this->getAttribute($this->getAttribute($this->getAttribute(            // line 32
 (isset($context["app"]) ? $context["app"] : null), "user", array()), "identity", array()), "username", array())) . ")"), "url" => array(0 => "/site/logout"), "linkOptions" => array("data-method" => "post"))));
             // line 37
             echo "    ";
@@ -116,7 +116,7 @@ class __TwigTemplate_ffd013ffd849eea3b8509743c6dc4eb114362e3ebd7147a0b600c646660
                     <button class=\"close\" data-dismiss=\"alert\">&times;</button>
                     ";
                 // line 59
-                echo twig_escape_filter($this->env, twig_join_filter($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "session", array()), "getFlash", array(0 => $context["alert"]), "method"), "<br/>"), "html", null, true);
+                echo twig_join_filter($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "session", array()), "getFlash", array(0 => $context["alert"]), "method"), "<br/>");
                 echo "
                 </div>
             ";
@@ -210,7 +210,7 @@ class __TwigTemplate_ffd013ffd849eea3b8509743c6dc4eb114362e3ebd7147a0b600c646660
 /*         {% set menuItems = menuItems|merge([*/
 /*         {'label' : 'Main', 'url' : ['/']},*/
 /*         {'label' : 'Categories', 'url' : ['/categories']},*/
-/*         {'label' : 'Last Questions', 'url' : ['/questions/new']},*/
+/*         {'label' : 'Questions', 'url' : ['/questions/new']},*/
 /*         {'label' : 'Stop Words', 'url' : ['/stopwords']},*/
 /*         {'label' : 'Users', 'url' : ['/users']},*/
 /*         {'label' : 'Logout (' ~ app.user.identity.username ~ ')',*/
@@ -240,7 +240,7 @@ class __TwigTemplate_ffd013ffd849eea3b8509743c6dc4eb114362e3ebd7147a0b600c646660
 /*             {% if app.session.hasFlash(alert) %}*/
 /*                 <div class="alert alert-{{ alert }}">*/
 /*                     <button class="close" data-dismiss="alert">&times;</button>*/
-/*                     {{ app.session.getFlash(alert)|join('<br/>') }}*/
+/*                     {{ app.session.getFlash(alert)|join('<br/>') | raw}}*/
 /*                 </div>*/
 /*             {% endif %}*/
 /*         {% endfor %}*/

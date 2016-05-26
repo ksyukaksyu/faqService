@@ -51,6 +51,23 @@ class UsersSearch extends User
 
         $this->load($params);
 
+        $createdFrom = 0;
+        $createdTo = 0;
+        $updatedFrom = 0;
+        $updatedTo = 0;
+
+        if ($this->created_at != '') {
+            $createdFrom = (new \DateTime($this->created_at . " 00:00:00"))->getTimestamp();
+            $createdTo = (new \DateTime($this->created_at . " 23:59:59"))->getTimestamp();
+            $this->created_at = (new \DateTime($this->created_at))->getTimestamp();
+        }
+
+        if ($this->updated_at != '') {
+            $updatedFrom = (new \DateTime($this->updated_at . " 00:00:00"))->getTimestamp();
+            $updatedTo = (new \DateTime($this->updated_at . " 23:59:59"))->getTimestamp();
+            $this->updated_at = (new \DateTime($this->updated_at))->getTimestamp();
+        }
+
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
@@ -59,10 +76,7 @@ class UsersSearch extends User
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
@@ -70,6 +84,18 @@ class UsersSearch extends User
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
             ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
             ->andFilterWhere(['like', 'email', $this->email]);
+
+        if ($createdFrom > 0 && $createdTo > 0) {
+            $query->andFilterWhere(
+                ['between', 'created_at', $createdFrom, $createdTo]
+            );
+        }
+
+        if ($updatedFrom > 0 && $updatedTo > 0) {
+            $query->andFilterWhere(
+                ['between', 'updated_at', $updatedFrom, $updatedTo]
+            );
+        }
 
         return $dataProvider;
     }

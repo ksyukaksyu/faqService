@@ -7,3 +7,7 @@ $( document ).ready(function() {
         offset: 100
     });
 });
+
+function questionFilter_setCategory(id) {
+    $('select[name="QuestionsSearch[id_category]"]').val(id).change();
+}

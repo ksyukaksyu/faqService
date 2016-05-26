@@ -58,8 +58,8 @@ class __TwigTemplate_a344de15e62407da7f668cf361541d16d7427b3b187397873fc3f54cb53
         // line 16
         echo $this->env->getExtension('yii2-twig')->widget("grid_view", array("dataProvider" =>         // line 17
 (isset($context["dataProvider"]) ? $context["dataProvider"] : null), "filterModel" =>         // line 18
-(isset($context["searchModel"]) ? $context["searchModel"] : null), "columns" => array(0 => array("class" => "\\yii\\grid\\SerialColumn"), 1 => "id", 2 => "name", 3 => array("class" => "\\yii\\grid\\ActionColumn"))));
-        // line 28
+(isset($context["searchModel"]) ? $context["searchModel"] : null), "columns" => array(0 => array("class" => "\\yii\\grid\\SerialColumn"), 1 => array("attribute" => "name", "format" => "raw", "value" => "RAWData"), 2 => array("class" => "\\yii\\grid\\ActionColumn"))));
+        // line 31
         echo "
 </div>";
     }
@@ -76,7 +76,7 @@ class __TwigTemplate_a344de15e62407da7f668cf361541d16d7427b3b187397873fc3f54cb53
 
     public function getDebugInfo()
     {
-        return array (  63 => 28,  61 => 18,  60 => 17,  59 => 16,  52 => 14,  49 => 13,  45 => 11,  40 => 9,  38 => 8,  36 => 7,  31 => 5,  29 => 4,  25 => 3,  23 => 2,  19 => 1,);
+        return array (  63 => 31,  61 => 18,  60 => 17,  59 => 16,  52 => 14,  49 => 13,  45 => 11,  40 => 9,  38 => 8,  36 => 7,  31 => 5,  29 => 4,  25 => 3,  23 => 2,  19 => 1,);
     }
 }
 /* {{ use('/yii/grid/GridView') }}*/
@@ -100,8 +100,11 @@ class __TwigTemplate_a344de15e62407da7f668cf361541d16d7427b3b187397873fc3f54cb53
 /*                 'columns': [*/
 /*                 {'class': '\\yii\\grid\\SerialColumn'},*/
 /* */
-/*                 'id',*/
-/*                 'name',*/
+/*                 {*/
+/*                     'attribute': 'name',*/
+/*                     'format': 'raw',*/
+/*                     'value': 'RAWData'*/
+/*                 },*/
 /* */
 /*                 {'class': '\\yii\\grid\\ActionColumn'},*/
 /*             ],*/

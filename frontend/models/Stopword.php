@@ -31,6 +31,7 @@ class Stopword extends \yii\db\ActiveRecord
         return [
             [['word'], 'required'],
             [['word'], 'string', 'max' => 50],
+            [['word'], 'unique'],
         ];
     }
 

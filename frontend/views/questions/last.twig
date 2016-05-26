@@ -1,27 +1,65 @@
 {{ use('/yii/grid/GridView') }}
-{% set title = 'Questions' %}
+{% set title = 'New Questions' %}
 {{ set(this, 'title', title) }}
 {% if not this.params.breadcrumbs %}
-{{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}
+    {{ set(this, 'params', this.params|merge({'breadcrumbs': []})) }}
 {% endif %}
 {% set breadcrumbs = this.params.breadcrumbs %}
 {% set breadcrumbs = breadcrumbs|merge([title]) %}
 {{ set(this, 'params', this.params|merge({'breadcrumbs': breadcrumbs})) }}
 <div class="question-index">
-    <h1>{{ html.encode(this.title) }}</h1>
-    {{ grid_view_widget({
-            'dataProvider': dataProvider,
-            'columns': [
-                {'class': '\\yii\\grid\\SerialColumn'},
+    <div class="row">
+        <div class="col-xs-6 col-md-2">
+            {{ include('_menu.twig') }}
+        </div>
+        <div class="col-xs-6 col-md-10">
+            <h1>{{ html.encode(this.title) }}</h1>
+            {# { include('_search.twig', {'model': searchModel}) } #}
+            {{ include('_categories.twig') }}
+            {{ grid_view_widget({
+                'dataProvider': dataProvider,
+                'filterModel': searchModel,
+                'columns': [
+                    {'class': '\\yii\\grid\\SerialColumn'},
 
-                'id',
-                'idCategory.name',
-                'datetime_added:datetime',
-                'state',
-                'is_blocked',
+                    'author_name',
+                    'questionShort',
+                    {
+                        'attribute' : 'id_category',
+                        'value' : 'category.name',
+                        'label' : 'Category',
+                        'filter' : categories
+                    },
+                    {
+                        'attribute': 'datetime_added',
+                        'format': 'datetime',
+                        'filter': DatePicker.widget({
+                            'model' : searchModel,
+                            'attribute': 'datetime_added',
+                            'dateFormat' : 'dd.MM.yyyy',
+                            'options' : {
+                                'class' : 'form-control'
+                            }
+                        })
+                    },
+                    {
+                        'attribute' : 'telegram',
+                        'format' : 'raw',
+                        'label' : ''
+                    },
 
-                {'class': '\\yii\\grid\\ActionColumn'},
-            ],
-        })
-    }}
+                    {'class': '\\yii\\grid\\ActionColumn'},
+                ],
+            })
+            }}
+        </div>
+    </div>
+
+    {#
+    'is_telegram',
+    'author_name',
+    'author_mail',
+    'question:ntext',
+    'answer:ntext'
+    #}
 </div>

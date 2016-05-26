@@ -46,29 +46,28 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["url"]) ? $context["url"] : null), "toRoute", array(0 => array(0 => "questions/create")), "method"), "html", null, true);
         echo "\" class=\"btn btn-success\">Still have a question?</a>
         </nav>
-        <br/>
     </div>
     <div class=\"col-xs-6 col-md-8\">
         ";
-        // line 16
+        // line 15
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["categories"]) ? $context["categories"] : null), "query", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["category"]) {
-            // line 17
+            // line 16
             echo "            <div class=\"panel-group\" id=\"accordion-";
             echo twig_escape_filter($this->env, $this->getAttribute($context["category"], "id", array()), "html", null, true);
             echo "\" role=\"tablist\" aria-multiselectable=\"true\">
                 ";
-            // line 18
+            // line 17
             $context["questions"] = $this->getAttribute($this->getAttribute($this->getAttribute($context["category"], "getQuestions", array(), "method"), "where", array(0 => "state='published' AND is_blocked=0"), "method"), "all", array(), "method");
-            // line 19
+            // line 18
             echo "                <h2 id=\"category-";
             echo twig_escape_filter($this->env, $this->getAttribute($context["category"], "id", array()), "html", null, true);
             echo "-part\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["category"], "name", array()), "html", null, true);
             echo "</h2>
                 ";
-            // line 20
+            // line 19
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["questions"]) ? $context["questions"] : null));
             $context['loop'] = array(
@@ -85,34 +84,34 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
                 $context['loop']['last'] = 1 === $length;
             }
             foreach ($context['_seq'] as $context["_key"] => $context["question"]) {
-                // line 21
+                // line 20
                 echo "                    <div class=\"panel panel-default\">
                         <div class=\"panel-heading\" role=\"tab\" id=\"heading-";
-                // line 22
+                // line 21
                 echo twig_escape_filter($this->env, $this->getAttribute($context["question"], "id", array()), "html", null, true);
                 echo "\">
                             <h4 class=\"panel-title\">
                                 <a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordion-";
-                // line 24
+                // line 23
                 echo twig_escape_filter($this->env, $this->getAttribute($context["category"], "id", array()), "html", null, true);
                 echo "\"
                                    href=\"#collapse-";
-                // line 25
+                // line 24
                 echo twig_escape_filter($this->env, $this->getAttribute($context["question"], "id", array()), "html", null, true);
                 echo "\" aria-expanded=\"false\"
                                    aria-controls=\"collapse-";
-                // line 26
+                // line 25
                 echo twig_escape_filter($this->env, $this->getAttribute($context["question"], "id", array()), "html", null, true);
                 echo "\">
                                     ";
-                // line 27
+                // line 26
                 echo twig_escape_filter($this->env, $this->getAttribute($context["question"], "question", array()), "html", null, true);
                 echo "
                                 </a>
                             </h4>
                         </div>
                         <div id=\"collapse-";
-                // line 31
+                // line 30
                 echo twig_escape_filter($this->env, $this->getAttribute($context["question"], "id", array()), "html", null, true);
                 echo "\" class=\"panel-collapse collapse ";
                 if (($this->getAttribute($context["loop"], "index", array()) == 1)) {
@@ -120,12 +119,12 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
                 }
                 echo "\" role=\"tabpanel\"
                              aria-labelledby=\"heading-";
-                // line 32
+                // line 31
                 echo twig_escape_filter($this->env, $this->getAttribute($context["question"], "id", array()), "html", null, true);
                 echo "\">
                             <div class=\"panel-body\">
                                 ";
-                // line 34
+                // line 33
                 echo twig_escape_filter($this->env, $this->getAttribute($context["question"], "answer", array()), "html", null, true);
                 echo "
                             </div>
@@ -144,7 +143,7 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['question'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 39
+            // line 38
             echo "            </div>
 
         ";
@@ -152,7 +151,7 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['category'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 42
+        // line 41
         echo "    </div>
 </div>
 
@@ -171,7 +170,7 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
 
     public function getDebugInfo()
     {
-        return array (  156 => 42,  148 => 39,  129 => 34,  124 => 32,  116 => 31,  109 => 27,  105 => 26,  101 => 25,  97 => 24,  92 => 22,  89 => 21,  72 => 20,  65 => 19,  63 => 18,  58 => 17,  54 => 16,  46 => 11,  42 => 9,  31 => 7,  27 => 6,  19 => 1,);
+        return array (  155 => 41,  147 => 38,  128 => 33,  123 => 31,  115 => 30,  108 => 26,  104 => 25,  100 => 24,  96 => 23,  91 => 21,  88 => 20,  71 => 19,  64 => 18,  62 => 17,  57 => 16,  53 => 15,  46 => 11,  42 => 9,  31 => 7,  27 => 6,  19 => 1,);
     }
 }
 /* {{ set(this,'title','FAQ') }}*/
@@ -186,7 +185,6 @@ class __TwigTemplate_eab7044a46559e25dbdbd195c759e84c0520c5058d1daecec4d261681b8
 /*             <br/>*/
 /*             <a href="{{ url.toRoute(['questions/create']) }}" class="btn btn-success">Still have a question?</a>*/
 /*         </nav>*/
-/*         <br/>*/
 /*     </div>*/
 /*     <div class="col-xs-6 col-md-8">*/
 /*         {% for category in categories.query %}*/

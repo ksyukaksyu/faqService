@@ -1,5 +1,5 @@
 {{ use('/yii/grid/GridView') }}
-{{ use('/common/models/User') }}
+{{ use('yii/jui/DatePicker') }}
 {% set title = 'Users' %}
 {{ set(this, 'title', title) }}
 {% if not this.params.breadcrumbs %}
@@ -25,13 +25,37 @@
                 {
                     'attribute': 'status',
                     'format': 'text',
-                    'content' : this.getUFStatus(),
-                    'filter': {'0': 'Locked'}
+                    'value': 'Status',
+                    'filter': statuses
                 },
-                'created_at:datetime',
-                'updated_at:datetime',
+                {
+                    'attribute': 'created_at',
+                    'format': 'datetime',
+                    'filter': DatePicker.widget({
+                        'model' : searchModel,
+                        'attribute': 'created_at',
+                        'dateFormat' : 'dd.MM.yyyy',
+                        'options' : {
+                            'class' : 'form-control'
+                        }
+                    })
+                },
+                {
+                    'attribute': 'updated_at',
+                    'format': 'datetime',
+                    'filter': DatePicker.widget({
+                        'model' : searchModel,
+                        'attribute': 'updated_at',
+                        'dateFormat' : 'dd.MM.yyyy',
+                        'options' : {
+                            'class' : 'form-control'
+                        }
+                    })
+                },
 
-                {'class': '\\yii\\grid\\ActionColumn'},
+                {
+                    'class': '\\yii\\grid\\ActionColumn'
+                },
             ],
         })
     }}

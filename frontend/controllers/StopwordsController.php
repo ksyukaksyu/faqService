@@ -5,14 +5,14 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Stopword;
 use frontend\models\StopwordsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
  * StopwordsController implements the CRUD actions for Stopword model.
  */
-class StopwordsController extends Controller
+class StopwordsController extends BaseController
 {
     public function behaviors()
     {
@@ -21,6 +21,15 @@ class StopwordsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -63,6 +72,11 @@ class StopwordsController extends Controller
         $model = new Stopword();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->addFlash(
+                'success',
+                "New stopword was successfuly added :)"
+            );
+            $this->log("added a new stopword \"{$model->word}\"");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create.twig', [
@@ -82,6 +96,11 @@ class StopwordsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->addFlash(
+                'success',
+                "Current stopword was successfuly updated :)"
+            );
+            $this->log("updated the stopword ({$model->id}) \"{$model->word}\"");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update.twig', [
@@ -98,7 +117,14 @@ class StopwordsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->delete();
+
+        Yii::$app->session->addFlash(
+            'warning',
+            "Selected stopword was successfuly deleted :("
+        );
+        $this->log("deleted the stopword ({$model->id}) \"{$model->word}\"");
 
         return $this->redirect(['index']);
     }

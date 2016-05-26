@@ -7,17 +7,15 @@ use frontend\models\Category;
 use frontend\models\Question;
 use frontend\models\QuestionAddForm;
 use frontend\models\QuestionsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\data\ActiveDataProvider;
 
 
 /**
  * QuestionsController implements the CRUD actions for Question model.
  */
-class QuestionsController extends Controller
+class QuestionsController extends BaseController
 {
     public function behaviors()
     {
@@ -59,6 +57,8 @@ class QuestionsController extends Controller
         return $this->render('index.twig', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'categories' => $this->getCategoriesForFilters(),
+            'statistics' => $this->getStatistics()
         ]);
     }
 
@@ -68,12 +68,14 @@ class QuestionsController extends Controller
      */
     public function actionNew()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Question::find()->where('state="draft"')->orderBy(['datetime_added' => SORT_DESC])->select('*'),
-        ]);
+        $searchModel = new QuestionsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'new');
 
         return $this->render('last.twig', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'categories' => $this->getCategoriesForFilters(),
+            'statistics' => $this->getStatistics()
         ]);
     }
 
@@ -86,6 +88,23 @@ class QuestionsController extends Controller
     {
         return $this->render('view.twig', [
             'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Lists blocked Question models.
+     * @return mixed
+     */
+    public function actionBlocked()
+    {
+        $searchModel = new QuestionsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'blocked');
+
+        return $this->render('blocked.twig', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'categories' => $this->getCategoriesForFilters(),
+            'statistics' => $this->getStatistics()
         ]);
     }
 
@@ -124,6 +143,7 @@ class QuestionsController extends Controller
         } else {
             return $this->render('update.twig', [
                 'model' => $model,
+                'categories' => Category::find()->select(['name', 'id'])->indexBy('id')->column()
             ]);
         }
     }
@@ -136,9 +156,21 @@ class QuestionsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        Yii::$app->session->addFlash(
+            'warning',
+            "Selected question was successfuly deleted :("
+        );
+        if (!is_null($model->category)) {
+            $this->log("deleted the question ({$model->id}) from category \"{$model->category->name}\" ({$model->category->id})");
+        }
+        else {
+            $this->log("deleted the question ({$model->id}) [no category]");
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
@@ -155,5 +187,17 @@ class QuestionsController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    private function getStatistics() {
+        return [
+            'new' => Question::find()->where("is_blocked=0 AND state='".Question::STATE_DRAFT."'")->count(),
+            'published' => Question::find()->where("is_blocked=0 AND state IN ('".Question::STATE_PUBLISHED."', '".Question::STATE_HIDDEN."')")->count(),
+            'blocked' => Question::find()->where("is_blocked=1")->count(),
+        ];
+    }
+
+    private function getCategoriesForFilters() {
+        return array_replace([-1 => '-- empty -- '], Category::find()->select(['name', 'id'])->indexBy('id')->column());
     }
 }

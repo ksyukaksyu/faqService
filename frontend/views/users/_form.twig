@@ -1,11 +1,46 @@
 {{ use('/yii/widgets/ActiveForm') }}
+{{ use('/yii/widgets/DetailView') }}
 <div class="user-form">
     {% set form = active_form_begin() %}
 
-        {{ form.field(model, 'status').textInput()|raw }}
+    {% if model.isNewRecord() %}
+        {{ form.field(model, 'username').textInput({'autofocus' : true})|raw }}
+    {% else %}
+        <div class="form-group">
+            <strong>User Name:</strong> {{ model.username }}
+        </div>
+    {% endif %}
+
+
+
+        {{ form.field(model, 'email').textInput()|raw }}
+
+        {% if model.isNewRecord() %}
+
+            {{ form.field(model, 'password').passwordInput()|raw }}
+
+            {{ form.field(model, 'password_confirm').passwordInput()|raw }}
+        {% else %}
+            {{ form
+                .field(model, 'status')
+                .label("Status")
+                .dropDownList(
+                    model.getStatusesList(),
+                    {'prompt':'Select Status'}
+                )|raw
+            }}
+
+            <div class="form-group">
+                <i><strong>Note:</strong> If you want to change password for current user, fill the fields below:</i>
+                <br/><br/>
+                {{ form.field(model, 'password').passwordInput()|raw }}
+
+                {{ form.field(model, 'password_confirm').passwordInput()|raw }}
+            </div>
+        {% endif %}
 
     <div class="form-group">
-        <input type="submit" value="{{ model.isNewRecord ? 'Create' : 'Update' }}" class="{{ model.isNewRecord ? "btn btn-success" : "btn btn-primary" }}">
+        <input type="submit" value="{{ model.isNewRecord() ? 'Create' : 'Update' }}" class="{{ model.isNewRecord() ? "btn btn-success" : "btn btn-primary" }}">
     </div>
     {{ active_form_end() }}
 </div>

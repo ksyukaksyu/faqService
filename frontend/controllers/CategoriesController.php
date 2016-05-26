@@ -5,14 +5,14 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Category;
 use frontend\models\CategoriesSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
  * CategoriesController implements the CRUD actions for Category model.
  */
-class CategoriesController extends Controller
+class CategoriesController extends BaseController
 {
     public function behaviors()
     {
@@ -21,6 +21,15 @@ class CategoriesController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -63,6 +72,11 @@ class CategoriesController extends Controller
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->addFlash(
+                'success',
+                "New category was successfuly added :)"
+            );
+            $this->log("added a new category \"{$model->name}\"");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create.twig', [
@@ -82,6 +96,11 @@ class CategoriesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->addFlash(
+                'success',
+                "Current category was successfuly updated :)"
+            );
+            $this->log("updated the category ({$model->id}) \"{$model->name}\"");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update.twig', [
@@ -98,7 +117,14 @@ class CategoriesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->delete();
+
+        Yii::$app->session->addFlash(
+            'warning',
+            "Selected category was successfuly deleted :("
+        );
+        $this->log("deleted the category ({$model->id}) \"{$model->name}\"");
 
         return $this->redirect(['index']);
     }
