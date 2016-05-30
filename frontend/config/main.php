@@ -25,7 +25,7 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
                 [
-                    'class' => 'common\log\AppTarget',
+                    'class' => 'frontend\mods\AppTarget',
                     'levels' => ['info'],
                     'categories' => ['faq_app'],
                     'logVars' => [],

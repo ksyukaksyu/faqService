@@ -18,6 +18,8 @@ use yii\bootstrap\Html;
  * @property string $author_mail
  * @property string $question
  * @property string $answer
+ * @property int telegram_user_id
+ * @property int telegram_message_id
  *
  * @property Category $idCategory
  * @property QuestionStopword[] $questionStopwords
@@ -104,24 +106,19 @@ class Question extends \yii\db\ActiveRecord
         return $this->hasMany(Stopword::className(), ['id' => 'id_stopword'])->viaTable('question_stopword', ['id_question' => 'id']);
     }
 
-    public function getQuestionShort() {
-        return (strlen($this->question) > 50) ? substr($this->question, 0, 50) . "..." : $this->question;
-    }
-    
-    public function getTelegram() {
-        return $this->is_telegram ?
-            Html::tag('span', '', [
-                'class' => 'glyphicon glyphicon-send',
-                'title' => 'From Telegram Bot'
-            ]) : '';
-    }
-
+    /**
+     * Save record
+     *
+     * @param bool $runValidation
+     * @param null $attributeNames
+     * @return bool|null
+     */
     public function save($runValidation = true, $attributeNames = null)
     {
         $needToUpdate = false;
 
         if (!$this->isNewRecord) {
-            if ($this->state != self::STATE_DRAFT && $this->answer == '') {
+            if ($this->state != self::STATE_DRAFT && $this->state != self::STATE_HIDDEN && $this->answer == '') {
                 $this->addError('state', 'You cannot publish question without answer!');
             }
             $needToUpdate = true;
@@ -161,6 +158,22 @@ class Question extends \yii\db\ActiveRecord
 
         return $needToUpdate ? parent::save($runValidation, $attributeNames) : $result;
     }
+
+    public function getQuestionShort() {
+        return (strlen($this->question) > 50) ? substr($this->question, 0, 50) . "..." : $this->question;
+    }
+
+    public function getTelegram() {
+        return $this->is_telegram ?
+            Html::tag('span', '', [
+                'class' => 'glyphicon glyphicon-send',
+                'title' => 'From Telegram Bot'
+            ]) : '';
+    }
+
+    #######################################################
+    #                  Some view helpers                  #
+    #######################################################
 
     public function getStopwordsBubles() {
         $stopwords = $this->getStopwords()->all();

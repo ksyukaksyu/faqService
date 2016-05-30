@@ -7,6 +7,7 @@ use frontend\models\Category;
 use frontend\models\Question;
 use frontend\models\QuestionAddForm;
 use frontend\models\QuestionsSearch;
+use frontend\mods\Telegram;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -32,12 +33,10 @@ class QuestionsController extends BaseController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create'],
-                        'roles' => ['?'],
+                        'actions' => ['create']
                     ],
                     [
                         'allow' => true,
-                        //'actions' => ['logout'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -137,8 +136,38 @@ class QuestionsController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $previousState = $model->getOldAttributes();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            // common message
+            Yii::$app->session->addFlash(
+                'success',
+                "Current question was successfuly updated :)"
+            );
+            $message = "updated the question ({$model->id}) from \"{$model->author_name}\"";
+            if (!is_null($model->id_category)) {
+                $message .= " in category \"{$model->category->name}\" ({$model->category->id})";
+            }
+
+            // check if published
+            if ($previousState['state'] != Question::STATE_PUBLISHED && $model->state == Question::STATE_PUBLISHED) {
+                $this->log("published the question ({$model->id}) from \"{$model->author_name}\"  in category \"{$model->category->name}\" ({$model->category->id})\"");
+                if ($model->is_telegram) {
+                    $telegram = new Telegram();
+                    $telegram->sendMessage(
+                        $model->telegram_user_id,
+                        $model->telegram_message_id,
+                        "*Hey, we found it :)*\n*The answer is:* " . $model->answer
+                    );
+                }
+            }
+
+            // check if hides
+            if ($previousState['state'] != Question::STATE_HIDDEN && $model->state == Question::STATE_HIDDEN) {
+                $this->log("hides the question ({$model->id}) from \"{$model->author_name}\"  in category \"{$model->category->name}\" ({$model->category->id})\"");
+            }
+
+            $this->log($message);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update.twig', [
@@ -189,6 +218,10 @@ class QuestionsController extends BaseController
         }
     }
 
+    /**
+     * Get statistic for category
+     * @return array
+     */
     private function getStatistics() {
         return [
             'new' => Question::find()->where("is_blocked=0 AND state='".Question::STATE_DRAFT."'")->count(),
@@ -197,6 +230,10 @@ class QuestionsController extends BaseController
         ];
     }
 
+    /**
+     * Get categories List for filters
+     * @return array
+     */
     private function getCategoriesForFilters() {
         return array_replace([-1 => '-- empty -- '], Category::find()->select(['name', 'id'])->indexBy('id')->column());
     }

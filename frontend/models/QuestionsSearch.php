@@ -47,6 +47,7 @@ class QuestionsSearch extends Question
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['datetime_added' => SORT_DESC]]
         ]);
 
         $this->load($params);

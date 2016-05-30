@@ -7,7 +7,7 @@ use yii\base\Model;
 use frontend\models\Question;
 
 /**
- * This is the model class for table "question".
+ * This is the model class for table "Question Add Form" for Guests.
  *
  * @property integer $id_category
  * @property string $author_name
@@ -44,6 +44,9 @@ class QuestionAddForm extends Model
         ];
     }
 
+    /**
+     * Save record
+     */
     public function save() {
         if (!$this->validate()) {
             return null;

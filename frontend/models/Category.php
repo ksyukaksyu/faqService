@@ -56,6 +56,10 @@ class Category extends \yii\db\ActiveRecord
         return $this->hasMany(Question::className(), ['id_category' => 'id']);
     }
 
+    #######################################################
+    #                 Some virtual fields                 #
+    #######################################################
+
     public function getTotalQuestionsNumber() {
         return Question::find()
             ->where("id_category={$this->id}")
@@ -76,15 +80,19 @@ class Category extends \yii\db\ActiveRecord
             ->count();
     }
 
+    #######################################################
+    #                  Some view helpers                  #
+    #######################################################
+
     public function getRAWData() {
         return $this->name .
             Html::tag('span', "new - {$this->NewQuestionsNumber}", [
                 'class' => 'label label-warning right',
-                'title' => 'Total'
+                'title' => 'New'
             ]) .
             Html::tag('span', "published - {$this->PublishedQuestionsNumber}", [
                 'class' => 'label label-success right',
-                'title' => 'Total'
+                'title' => 'Published'
             ]) .
             Html::tag('span', "total - {$this->TotalQuestionsNumber}", [
                 'class' => 'label label-primary right',

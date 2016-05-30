@@ -6,35 +6,12 @@ use Yii;
 use frontend\models\Stopword;
 use frontend\models\StopwordsSearch;
 use yii\web\NotFoundHttpException;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 
 /**
  * StopwordsController implements the CRUD actions for Stopword model.
  */
 class StopwordsController extends BaseController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Stopword models.
      * @return mixed

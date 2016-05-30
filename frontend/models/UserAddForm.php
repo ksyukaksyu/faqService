@@ -53,6 +53,10 @@ class UserAddForm extends Model
         ];
     }
 
+    /**
+     * Save record
+     * @return User|null
+     */
     public function save() {
         if (!$this->validate()) {
             return null;
@@ -72,14 +76,13 @@ class UserAddForm extends Model
 
         return null;
     }
-
+    
     public function isNewRecord() {
         return true;
     }
 
     /**
      * Statuses list
-     *
      * @return array
      */
     public static function getStatusesList() {

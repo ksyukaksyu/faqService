@@ -7,7 +7,7 @@ use Yii;
 use yii\base\Model;
 
 /**
- * This is the model class for table "question".
+ * This is the model class for table "User Update Form".
  *
  * @property int $id
  * @property string $username
@@ -51,6 +51,9 @@ class UserUpdateForm extends Model
         ];
     }
 
+    /**
+     * Save record
+     */
     public function save() {
         if (!$this->validate()) {
             return null;

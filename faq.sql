@@ -1,7 +1,7 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 7.1.13.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 26.05.2016 23:29:56
+-- Дата скрипта: 30.05.2016 2:05:01
 -- Версия сервера: 5.5.5-10.1.8-MariaDB
 -- Версия клиента: 4.1
 --
@@ -21,10 +21,6 @@
 -- Установка кодировки, с использованием которой клиент будет посылать запросы на сервер
 --
 SET NAMES 'utf8';
-
--- 
--- Установка базы данных по умолчанию
---
 
 --
 -- Описание для таблицы category
@@ -110,6 +106,8 @@ CREATE TABLE IF NOT EXISTS question (
   author_mail VARCHAR(100) DEFAULT NULL COMMENT 'Author E-Mail',
   question TEXT NOT NULL COMMENT 'Question Text',
   answer TEXT DEFAULT NULL COMMENT 'Answer Text',
+  telegram_user_id INT(11) DEFAULT NULL,
+  telegram_message_id INT(11) DEFAULT NULL,
   PRIMARY KEY (id),
   INDEX blocked (is_blocked),
   INDEX category (id_category),
@@ -119,8 +117,8 @@ CREATE TABLE IF NOT EXISTS question (
     REFERENCES category(id) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 34
-AVG_ROW_LENGTH = 712
+AUTO_INCREMENT = 42
+AVG_ROW_LENGTH = 655
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
 
@@ -184,29 +182,30 @@ INSERT INTO user VALUES
 -- Вывод данных для таблицы question
 --
 INSERT INTO question VALUES
-(3, 6, '2016-05-23 03:00:34', 'published', 0, 0, 'vasya', 'vasya@vasya.vasya', 'How to program JQuery?', 'Fluently.'),
-(4, 3, '2016-05-23 17:56:25', 'published', 0, 0, 'Alex', 'alex@alex.com', 'What is PHP?', 'From the preface of the manual:\r\n\r\nPHP is an HTML-embedded scripting language. Much of its syntax is borrowed from C, Java and Perl with a couple of unique PHP-specific features thrown in. The goal of the language is to allow web developers to write dynamically generated pages quickly.\r\n'),
-(5, 3, '2016-05-23 17:56:25', 'published', 0, 0, 'Dru', 'Dru@dell.com', 'Can I run several versions of PHP at the same time?', 'Yes. See the INSTALL file that is included in the PHP source distribution.'),
-(6, 4, '2016-05-23 18:15:22', 'hidden', 0, 0, 'Fill', 'asher@mail.com', 'Is C++ a practical language?', 'Yes.\r\n\r\nC++ is a practical tool. It’s not perfect, but it’s useful.\r\nIn the world of industrial software, C++ is viewed as a solid, mature, mainstream tool. It has widespread industry support which makes it “good” from an overall business perspective.'),
-(7, 4, '2016-05-23 18:15:22', 'published', 0, 0, 'Garry Veber', 'gveber@drt.org', 'Is C++ a perfect language?', 'Nope.\r\n\r\nC++ wasn’t designed to demonstrate what a perfect language looks like. It was designed to be a practical tool for solving real world problems. It has a few warts, as do all practical programming tools, but the only place where it’s appropriate to keep fiddling with something until it’s perfect is in a pure academic setting. That wasn’t C++’s goal.'),
-(8, 4, '2016-05-23 18:17:40', 'published', 0, 0, 'Roseline', 'r.vott@sael.com', 'Why is C++ so big?', 'C++ is not a tiny language designed to be a minimal language for teaching, but neither are the languages people most often compare it to, such as C, Java, C#. They too are huge compared to say, Pascal as Dr. Wirth originally defined it – for good reasons. The programming world is far more complex today than it was 30 years ago, and modern programming languages reflect that.\r\n\r\nC++ isn’t as big as some people imagine. By word count, the size of the language specifications (excluding standard libraries) for C++, C#, and Java are currently within a few percentage points of each other. This reflects that they are general-purpose mainstream languages that have grown similar features – auto/var type deduction, range for loops, lambda functions, various levels of support for generic programming, and so on. It also reflects what design theorists call “essential complexity in the problem domain” – the complexity in the real world and that a serious language has to expose, everything from fundamental OS differences to calling C++ libraries.\r\n\r\nIn some cases C++ directly supports (i.e., in the language) what some other languages support through libraries, so the language part will be relatively larger. On the other hand, if you want to write a “typical modern application”, you need to consider operating system interfaces, GUI, databases, web interfaces, etc. the sum of language features, libraries, and programming conventions and standards that you must become familiar with dwarf the programming language. Here, C++’s size can be an advantage as far as it better supports good libraries.\r\n\r\nFinally, the days where a novice programmer can know all of a language are gone, at least for the languages in widespread industrial use. Few people know “all of C” or “all of Java” either and none of those are novices. It follows that nobody should have to apologize for the fact that novices do not know all of C++. What you must do - in any language – is to pick a subset, get working writing code, and gradually learn more of the language, its libraries, and its tools. For my suggestion on how beginners can approach C++, see Programming: Principles and Practice using C++.'),
-(9, 4, '2016-05-23 18:17:40', 'hidden', 0, 0, 'Travis Gosh', 'tr.gosh@sart.go', 'What’s the best way to improve my C++ programs?', 'That depends on how you use it. Most people underestimate abstract classes and templates. Conversely, most people seriously overuse casts and macros. Have a look at one of Stroustrup’s papers or books for ideas. One way of thinking of abstract classes and templates is as interfaces that allow a more clean and logical presentation of services than is easy to provide through functions or single-rooted class hierarchies. See other sections of this FAQ for some specific examples and ideas.'),
-(10, 5, '2016-05-23 18:29:30', 'published', 0, 1, 'Gregg', 'gregg@list.ru', 'When can I use HTML5?', 'People can already use parts of the platform that interoperate, but W3C''s mission is global interoperable, to ensure that the web is available to all. Not all elements are fully implemented yet and some of them provide builtin fallback mechanisms, such as <video> or <input>. One can use HTML5 today, knowing the existing limitations and ensuring proper fallbacks.'),
-(11, 5, '2016-05-23 18:29:30', 'published', 0, 0, 'Kimmy', 'kim.string@fork.com', 'When will HTML5 be finished? What is the status of HTML5?', 'HTML5 is a work in progress. We expect to be feature complete by December 2012. W3C is developing a comprehensive test suite to achieve interoperability for the full specification by 2014, the target date for Recommendation. W3C''s primary goal is to ensure that the HTML5 standard is of the highest quality and allows the creation of interoperable implementations. The timeline in the charter is based on implementation expectations and development of a test suite. The timeline is designed to help the industry plan for adoption. Ongoing active participation by browser vendors, other software developers, and the community in implementation and testing will help ensure the successful and timely roll out of the standard.'),
-(12, 5, '2016-05-23 19:00:06', 'draft', 0, 1, 'Fritz', 'fritz@uotlook.com', 'Will there be an HTML6?', NULL),
-(13, 6, '2016-05-23 19:00:06', 'published', 0, 0, 'cris brown', 'cbrown45@dad.tor', 'How do I disable/enable a form element?', 'You can enable or disable a form element using the .prop() method:\r\n\r\n// Disable #x\r\n$( "#x" ).prop( "disabled", true );\r\n \r\n// Enable #x\r\n$( "#x" ).prop( "disabled", false );'),
-(15, 3, '2016-05-23 23:02:01', 'draft', 0, 0, 'Benny Niemeijer', 'kefforeffalle-0913@yopmail.com', 'Same library with distinct version', NULL),
-(16, 3, '2016-05-23 23:03:15', 'draft', 0, 0, 'BlueSam', 'Wheirlit@jourrapide.com', 'DataAnnotations CustomValidation not working', NULL),
-(19, NULL, '2016-05-23 23:11:53', 'draft', 0, 1, 'Mathi901', 'jz1gniexi8vn7o5@7oe60n274.com', 'In URF How to insert information with custom many to many relation table', NULL),
-(22, NULL, '2016-05-23 23:19:37', 'draft', 0, 1, 'A Rhoades', '7p9507oo@mbtjerpwxv.com', 'How to add a DataSource Connection for PostgreSQL Database to Visual Studio 2013? (In order to use Entity Framework)', NULL),
-(24, NULL, '2016-05-23 23:23:00', 'draft', 0, 1, 'JVilla', 'e2tzixxxrr721q@apjpxsq.com', 'Convert string to type of another variable', NULL),
-(25, NULL, '2016-05-23 23:24:12', 'draft', 0, 1, 'Brent Oliver', 'aur62gh9ldg9-w-@9mfsynni.com', 'Is it possible to force the use of “using” for disposable classes?', NULL),
-(26, 3, '2016-05-23 23:59:26', 'draft', 0, 0, 'user4956321', 'l_63m6w8j@ucmk12k.com', 'DataAdapter.Fill performance anomaly', NULL),
-(27, 3, '2016-05-23 23:59:56', 'draft', 0, 0, 'JDS', 'sdfsafgasfgasdfasdfa@asdf.er', 'Edit Home Page which is not part of betterCMS', NULL),
-(28, 6, '2016-05-24 00:10:41', 'draft', 0, 0, 'TofuBug', 'sdf@sdf.rt', 'Which one is faster? Regex or EndsWith?', NULL),
-(29, 5, '2016-05-24 00:10:54', 'draft', 0, 0, 'Leandro Tuttini', 'sdf@sdf.rt', 'Authenticating Website Members as Users in CKFinder v3', NULL),
-(31, 4, '2016-05-26 01:06:42', 'draft', 1, 0, 'Vitya', 'qlpa0h6n@q1jcd0qm51n.com', 'I have youtube', NULL),
-(33, 5, '2016-05-26 19:20:30', 'draft', 1, 0, 'Yest', '0onoong-.w7a-l@2cbakmtdlf.com', 'https://vk.com/laboca', NULL);
+(3, 6, '2016-05-23 03:00:34', 'published', 0, 0, 'vasya', 'vasya@vasya.vasya', 'How to program JQuery?', 'Fluently.', NULL, NULL),
+(4, 3, '2016-05-23 17:56:25', 'published', 0, 0, 'Alex', 'alex@alex.com', 'What is PHP?', 'From the preface of the manual:\r\n\r\nPHP is an HTML-embedded scripting language. Much of its syntax is borrowed from C, Java and Perl with a couple of unique PHP-specific features thrown in. The goal of the language is to allow web developers to write dynamically generated pages quickly.\r\n', NULL, NULL),
+(5, 3, '2016-05-23 17:56:25', 'published', 0, 0, 'Dru', 'Dru@dell.com', 'Can I run several versions of PHP at the same time?', 'Yes. See the INSTALL file that is included in the PHP source distribution.', NULL, NULL),
+(6, 4, '2016-05-23 18:15:22', 'hidden', 0, 0, 'Fill', 'asher@mail.com', 'Is C++ a practical language?', 'Yes.\r\n\r\nC++ is a practical tool. It’s not perfect, but it’s useful.\r\nIn the world of industrial software, C++ is viewed as a solid, mature, mainstream tool. It has widespread industry support which makes it “good” from an overall business perspective.', NULL, NULL),
+(7, 4, '2016-05-23 18:15:22', 'published', 0, 0, 'Garry Veber', 'gveber@drt.org', 'Is C++ a perfect language?', 'Nope.\r\n\r\nC++ wasn’t designed to demonstrate what a perfect language looks like. It was designed to be a practical tool for solving real world problems. It has a few warts, as do all practical programming tools, but the only place where it’s appropriate to keep fiddling with something until it’s perfect is in a pure academic setting. That wasn’t C++’s goal.', NULL, NULL),
+(8, 4, '2016-05-23 18:17:40', 'published', 0, 0, 'Roseline', 'r.vott@sael.com', 'Why is C++ so big?', 'C++ is not a tiny language designed to be a minimal language for teaching, but neither are the languages people most often compare it to, such as C, Java, C#. They too are huge compared to say, Pascal as Dr. Wirth originally defined it – for good reasons. The programming world is far more complex today than it was 30 years ago, and modern programming languages reflect that.\r\n\r\nC++ isn’t as big as some people imagine. By word count, the size of the language specifications (excluding standard libraries) for C++, C#, and Java are currently within a few percentage points of each other. This reflects that they are general-purpose mainstream languages that have grown similar features – auto/var type deduction, range for loops, lambda functions, various levels of support for generic programming, and so on. It also reflects what design theorists call “essential complexity in the problem domain” – the complexity in the real world and that a serious language has to expose, everything from fundamental OS differences to calling C++ libraries.\r\n\r\nIn some cases C++ directly supports (i.e., in the language) what some other languages support through libraries, so the language part will be relatively larger. On the other hand, if you want to write a “typical modern application”, you need to consider operating system interfaces, GUI, databases, web interfaces, etc. the sum of language features, libraries, and programming conventions and standards that you must become familiar with dwarf the programming language. Here, C++’s size can be an advantage as far as it better supports good libraries.\r\n\r\nFinally, the days where a novice programmer can know all of a language are gone, at least for the languages in widespread industrial use. Few people know “all of C” or “all of Java” either and none of those are novices. It follows that nobody should have to apologize for the fact that novices do not know all of C++. What you must do - in any language – is to pick a subset, get working writing code, and gradually learn more of the language, its libraries, and its tools. For my suggestion on how beginners can approach C++, see Programming: Principles and Practice using C++.', NULL, NULL),
+(9, 4, '2016-05-23 18:17:40', 'hidden', 0, 0, 'Travis Gosh', 'tr.gosh@sart.go', 'What’s the best way to improve my C++ programs?', 'That depends on how you use it. Most people underestimate abstract classes and templates. Conversely, most people seriously overuse casts and macros. Have a look at one of Stroustrup’s papers or books for ideas. One way of thinking of abstract classes and templates is as interfaces that allow a more clean and logical presentation of services than is easy to provide through functions or single-rooted class hierarchies. See other sections of this FAQ for some specific examples and ideas.', NULL, NULL),
+(10, 5, '2016-05-23 18:29:30', 'published', 0, 0, 'Gregg', 'gregg@list.ru', 'When can I use HTML5?', 'People can already use parts of the platform that interoperate, but W3C''s mission is global interoperable, to ensure that the web is available to all. Not all elements are fully implemented yet and some of them provide builtin fallback mechanisms, such as <video> or <input>. One can use HTML5 today, knowing the existing limitations and ensuring proper fallbacks.', NULL, NULL),
+(11, 5, '2016-05-23 18:29:30', 'published', 0, 0, 'Kimmy', 'kim.string@fork.com', 'When will HTML5 be finished? What is the status of HTML5?', 'HTML5 is a work in progress. We expect to be feature complete by December 2012. W3C is developing a comprehensive test suite to achieve interoperability for the full specification by 2014, the target date for Recommendation. W3C''s primary goal is to ensure that the HTML5 standard is of the highest quality and allows the creation of interoperable implementations. The timeline in the charter is based on implementation expectations and development of a test suite. The timeline is designed to help the industry plan for adoption. Ongoing active participation by browser vendors, other software developers, and the community in implementation and testing will help ensure the successful and timely roll out of the standard.', NULL, NULL),
+(12, 5, '2016-05-23 19:00:06', 'draft', 0, 0, 'Fritz', 'fritz@uotlook.com', 'Will there be an HTML6?', NULL, NULL, NULL),
+(13, 6, '2016-05-23 19:00:06', 'published', 0, 0, 'cris brown', 'cbrown45@dad.tor', 'How do I disable/enable a form element?', 'You can enable or disable a form element using the .prop() method:\r\n\r\n// Disable #x\r\n$( "#x" ).prop( "disabled", true );\r\n \r\n// Enable #x\r\n$( "#x" ).prop( "disabled", false );', NULL, NULL),
+(15, 3, '2016-05-23 23:02:01', 'hidden', 0, 0, 'Benny Niemeijer', 'kefforeffalle-0913@yopmail.com', 'Same library with distinct version', '', NULL, NULL),
+(16, 3, '2016-05-23 23:03:15', 'draft', 0, 0, 'BlueSam', 'Wheirlit@jourrapide.com', 'DataAnnotations CustomValidation not working', NULL, NULL, NULL),
+(19, NULL, '2016-05-23 23:11:53', 'draft', 0, 0, 'Mathi901', 'jz1gniexi8vn7o5@7oe60n274.com', 'In URF How to insert information with custom many to many relation table', NULL, NULL, NULL),
+(22, 3, '2016-05-23 23:19:37', 'draft', 0, 0, 'A Rhoades', '7p9507oo@mbtjerpwxv.com', 'How to add a DataSource Connection for PostgreSQL Database to Visual Studio 2013? (In order to use Entity Framework)', '', NULL, NULL),
+(24, 5, '2016-05-23 23:23:00', 'draft', 0, 0, 'JVilla', 'e2tzixxxrr721q@apjpxsq.com', 'Convert string to type of another variable', '', NULL, NULL),
+(25, NULL, '2016-05-23 23:24:12', 'draft', 0, 0, 'Brent Oliver', 'aur62gh9ldg9-w-@9mfsynni.com', 'Is it possible to force the use of “using” for disposable classes?', NULL, NULL, NULL),
+(26, 3, '2016-05-23 23:59:26', 'draft', 0, 0, 'user4956321', 'l_63m6w8j@ucmk12k.com', 'DataAdapter.Fill performance anomaly', NULL, NULL, NULL),
+(27, 3, '2016-05-23 23:59:56', 'draft', 0, 0, 'JDS', 'sdfsafgasfgasdfasdfa@asdf.er', 'Edit Home Page which is not part of betterCMS', NULL, NULL, NULL),
+(28, 6, '2016-05-24 00:10:41', 'draft', 0, 0, 'TofuBug', 'sdf@sdf.rt', 'Which one is faster? Regex or EndsWith?', NULL, NULL, NULL),
+(29, 5, '2016-05-24 00:10:54', 'draft', 0, 0, 'Leandro Tuttini', 'sdf@sdf.rt', 'Authenticating Website Members as Users in CKFinder v3', NULL, NULL, NULL),
+(31, 4, '2016-05-26 01:06:42', 'draft', 1, 0, 'Vitya', 'qlpa0h6n@q1jcd0qm51n.com', 'I have youtube', NULL, NULL, NULL),
+(33, 5, '2016-05-26 19:20:30', 'draft', 1, 0, 'Yest', '0onoong-.w7a-l@2cbakmtdlf.com', 'https://vk.com/laboca', NULL, NULL, NULL),
+(41, 3, '2016-05-30 02:00:53', 'published', 0, 1, 'Ksenia Konovalova', NULL, 'Можно ли писать на php?', 'Даже нужно!', 117532170, 68);
 
 -- 
 -- Вывод данных для таблицы question_stopword
