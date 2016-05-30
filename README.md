@@ -56,8 +56,8 @@ class common\log\AppTarget
 
 Класс:
 ```php
-frontend\models\Stopword
-frontend\models\StopwordsSearch
+class frontend\models\Stopword
+class frontend\models\StopwordsSearch
 ```
 
 Метод:
