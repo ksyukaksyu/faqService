@@ -21565,3 +21565,83 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1464561894.0276
     'REQUEST_TIME' => 1464561894
 ]
+2016-06-02 09:23:49 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Connection.php:600
+Stack trace:
+#0 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Connection.php(600): PDO->__construct('mysql:host=loca...', 'root', 'password', NULL)
+#1 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Connection.php(542): yii\db\Connection->createPdoInstance()
+#2 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Connection.php(861): yii\db\Connection->open()
+#3 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Connection.php(848): yii\db\Connection->getMasterPdo()
+#4 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#5 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Command.php(894): yii\db\Command->prepare(true)
+#6 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Command.php(362): yii\db\Command->queryInternal('fetchAll', NULL)
+#7 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Query.php(210): yii\db\Command->queryAll()
+#8 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#9 /Users/ksyukaksyu/WebSites/netology/diploma/frontend/controllers/SiteController.php(82): yii\db\ActiveQuery->all()
+#10 [internal function]: frontend\controllers\SiteController->actionIndex()
+#11 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#12 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/base/Controller.php(154): yii\base\InlineAction->runWithParams(Array)
+#13 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('', Array)
+#14 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('', Array)
+#15 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#16 /Users/ksyukaksyu/WebSites/netology/diploma/frontend/web/index.php(18): yii\base\Application->run()
+#17 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Connection.php:547
+Stack trace:
+#0 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Connection.php(861): yii\db\Connection->open()
+#1 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Connection.php(848): yii\db\Connection->getMasterPdo()
+#2 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#3 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Command.php(894): yii\db\Command->prepare(true)
+#4 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Command.php(362): yii\db\Command->queryInternal('fetchAll', NULL)
+#5 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/Query.php(210): yii\db\Command->queryAll()
+#6 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#7 /Users/ksyukaksyu/WebSites/netology/diploma/frontend/controllers/SiteController.php(82): yii\db\ActiveQuery->all()
+#8 [internal function]: frontend\controllers\SiteController->actionIndex()
+#9 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#10 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/base/Controller.php(154): yii\base\InlineAction->runWithParams(Array)
+#11 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('', Array)
+#12 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('', Array)
+#13 /Users/ksyukaksyu/WebSites/netology/diploma/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#14 /Users/ksyukaksyu/WebSites/netology/diploma/frontend/web/index.php(18): yii\base\Application->run()
+#15 {main}
+Additional Information:
+
+2016-06-02 09:23:49 [::1][-][-][info][application] $_COOKIE = [
+    '_csrf' => '631bcccff160bac1de7490294c4ef299112e9cfc0f0c5d9e09e4cb7d25fc6feba:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"b6UBUv_OLc5ami7xqMsdNDrQtyAfUzlm\";}'
+    'PHPSESSID' => '08768d8a949761032bb893fc50043b59'
+    '_identity' => '56018f694af2a5d5ecd116285576b1bab1f89b46b549bd5e775589228c4f53f8a:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[1,\"jSFHq7XGCmVfkWM8k5zT_lSt1ZAgdLSN\",2592000]\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'netdiploma'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru,en;q=0.8,en-US;q=0.6'
+    'HTTP_COOKIE' => '_csrf=631bcccff160bac1de7490294c4ef299112e9cfc0f0c5d9e09e4cb7d25fc6feba%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22b6UBUv_OLc5ami7xqMsdNDrQtyAfUzlm%22%3B%7D; PHPSESSID=08768d8a949761032bb893fc50043b59; _identity=56018f694af2a5d5ecd116285576b1bab1f89b46b549bd5e775589228c4f53f8a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22jSFHq7XGCmVfkWM8k5zT_lSt1ZAgdLSN%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/bin:/bin:/usr/sbin:/sbin'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'netdiploma'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/Users/ksyukaksyu/WebSites/netology/diploma/frontend/web'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/Users/ksyukaksyu/WebSites/netology/diploma/frontend/web/index.php'
+    'REMOTE_PORT' => '60252'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1464848629.85
+    'REQUEST_TIME' => 1464848629
+    'argv' => []
+    'argc' => 0
+]

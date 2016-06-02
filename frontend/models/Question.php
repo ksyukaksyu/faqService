@@ -136,23 +136,24 @@ class Question extends \yii\db\ActiveRecord
             $this->unlink('stopwords', $stopword, true);
         }
 
-        $stopwords = Stopword::find()->all();
+        $stopwords = $this->checkWithStopwords();
 
-        foreach ($stopwords as $stopword) {
-            if (strpos(strtolower($this->question), strtolower($stopword->word)) !== false) {
+        if (!is_null($stopwords)) {
+            foreach ($stopwords as $stopword) {
                 $this->link('stopwords', $stopword);
-                if ($this->isNewRecord) {
-                    $this->is_blocked = true;
-                }
-                $needToUpdate = true;
             }
+            if ($this->isNewRecord) {
+                $this->is_blocked = true;
+            }
+            $needToUpdate = true;
         }
 
         if (!$this->isNewRecord) {
-            if (count($this->stopwords) > 0 && (int)$this->is_blocked == 0) {
-                $this->addError('question', 'You cannot unblock question that contains stopwords!');
-                $needToUpdate = false;
-                $result = null;
+            if (count($this->stopwords) > 0 && $this->getOldAttribute('is_blocked') == 1 && (int)$this->is_blocked == 0) {
+                Yii::$app->session->addFlash(
+                    'warning',
+                    'You unblocked the question that contains stopwords!'
+                );
             }
         }
 
@@ -169,6 +170,26 @@ class Question extends \yii\db\ActiveRecord
                 'class' => 'glyphicon glyphicon-send',
                 'title' => 'From Telegram Bot'
             ]) : '';
+    }
+
+    private function checkWithStopwords() {
+        $result = null;
+
+        $stopwords = Stopword::find()->all();
+
+        preg_match_all('(\w+)', $this->question, $questionWords);
+
+        if (isset($questionWords[0]) && count($questionWords[0]) > 0) {
+            foreach ($questionWords[0] as $word) {
+                foreach ($stopwords as $stopword) {
+                    if (strtolower($word) == strtolower($stopword->word)) {
+                        $result[] = $stopword;
+                    }
+                }
+            }
+        }
+
+        return $result;
     }
 
     #######################################################

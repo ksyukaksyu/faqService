@@ -3,9 +3,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=ksu_faq',
-            'username' => 'root',
-            'password' => 'password',
+            'dsn' => 'mysql:host=localhost;dbname=netdiploma',
+            'username' => 'local',
+            'password' => 'local',
             'charset' => 'utf8',
         ],
         'cache' => [
