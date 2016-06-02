@@ -67,6 +67,7 @@ class UserAddForm extends Model
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
+        $user->generateAuthKey();
         $user->status = 10;
 
         if ($user->save()) {
