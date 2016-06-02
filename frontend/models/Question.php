@@ -116,8 +116,10 @@ class Question extends \yii\db\ActiveRecord
     public function save($runValidation = true, $attributeNames = null)
     {
         $needToUpdate = false;
+        // save flag before all operations
+        $isNewRecord = $this->isNewRecord;
 
-        if (!$this->isNewRecord) {
+        if (!$isNewRecord) {
             if ($this->state != self::STATE_DRAFT && $this->state != self::STATE_HIDDEN && $this->answer == '') {
                 $this->addError('state', 'You cannot publish question without answer!');
             }
@@ -142,7 +144,7 @@ class Question extends \yii\db\ActiveRecord
             foreach ($stopwords as $stopword) {
                 $this->link('stopwords', $stopword);
             }
-            if ($this->isNewRecord) {
+            if ($isNewRecord) {
                 $this->is_blocked = true;
             }
             $needToUpdate = true;
