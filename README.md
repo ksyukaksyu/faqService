@@ -3,34 +3,34 @@ FAQ servise with moderation and telegram-bot
 
 @author Ksenia Konovalova
 
-# Установка
-Для установки нужно скопировать все содержимое в корневой каталог вашего сервера. Для веб-сервера Nginx необходима дополнительная настройка:
+# Install
+Additional info for nginx server:
 ```
 https://github.com/yiisoft/yii2/blob/master/docs/guide/start-installation.md#recommended-nginx-configuration-
 ```
 
-Домашняя директория:
+Home:
 ```
 /frontend/web/
 ```
 
-Дефолтный пользователь:
+User:
 ```
 admin:adminadmin
 ```
 
-## БД
-Параметры подключения к БД задаются в файле:
+## DB
+DB config:
 ```
 /common/config/main.php
 ```
 
-Дамп базы данных:
+DB dump:
 ```
 faq.sql
 ```
 
-Схема базы данных:
+DB schema:
 ```
 db_schema.jpg
 ```
@@ -38,40 +38,40 @@ db_schema.jpg
 ![schema](db_schema.jpg)
 
 
-# Дополнительный функционал
+# Features
 
-## Логгер
+## Logger
 
-Класс:
+Class:
 ```php
 class common\log\AppTarget
 ```
 
-Лог-файл:
+Log file:
 ```
 /frontend/runtime/logs/actions.log
 ```
 
-## Блокировка по ключевым словам
+## Bloking by key words
 
-Класс:
+Class:
 ```php
 class frontend\models\Stopword
 class frontend\models\StopwordsSearch
 ```
 
-Метод:
+Method:
 ```php
 frontend\models\Question->save()
 ```
 
 ## Telegram Bot
-Класс:
+Class:
 ```php
 class frontend\mods\Telegram
 ```
 
-Бот:
+Bot:
 ```
 http://telegram.me/FAQNetDiplomaBot
 ```
