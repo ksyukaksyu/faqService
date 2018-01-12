@@ -1,4 +1,4 @@
-Netology Diploma Project
+FAQ servise with moderation and telegram-bot
 ===============================
 
 @author Ksenia Konovalova
